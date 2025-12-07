@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profil | E-Learning Cyber Security</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            borderlight: '#D9D9D9',
+            muted: '#909090',
+            softgreen: '#EEFBF3',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-softgreen/60">
+
+  <div class="min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <header class="bg-softgreen/80 border-b border-borderlight">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+            <img src="public/LogoHeader.png" alt="Logo" class="w-10 h-10 rounded-xl object-cover">
+          </div>
+          <div class="font-lexend leading-tight">
+            <div class="text-gray-800 text-xl font-bold">Cyber</div>
+            <div class="text-primary text-xl font-medium">Security</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="homebase.html" class="text-sm font-mont text-muted hover:text-primary">
+            ← Kembali ke Beranda
+          </a>
+          <button
+            id="logout-btn"
+            class="px-4 py-2 rounded-2xl border border-primary text-primary font-mont text-sm font-semibold bg-white hover:bg-primary hover:text-white transition">
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1">
+      <div class="max-w-5xl mx-auto px-4 lg:px-8 py-8 lg:py-10">
+        <div class="grid lg:grid-cols-[1.1fr,1.5fr] gap-8 items-start">
+
+          <!-- LEFT: INFO USER -->
+          <section class="bg-white rounded-3xl border border-borderlight shadow-md p-6 sm:p-7">
+            <h2 class="font-lexend text-2xl font-semibold mb-4">
+              Profil Saya
+            </h2>
+
+            <div class="space-y-4 text-sm font-mont">
+              <!-- Email -->
+              <div>
+                <p class="text-muted mb-1">Email</p>
+                <p id="email_display" class="font-semibold text-gray-900 break-all">-</p>
+              </div>
+
+              <!-- Nama -->
+              <div>
+                <p class="text-muted mb-1">Nama Lengkap</p>
+                <p id="name_display" class="font-semibold text-gray-900">-</p>
+              </div>
+
+              <!-- Nomor Telepon -->
+              <div>
+                <p class="text-muted mb-1">Nomor Telepon</p>
+                <p id="phone_display" class="text-gray-900">-</p>
+              </div>
+
+              <!-- Institusi -->
+              <div>
+                <p class="text-muted mb-1">Institusi</p>
+                <p id="institution_display" class="text-gray-900">-</p>
+              </div>
+
+              <!-- Paket Langganan -->
+              <div class="pt-2 border-t border-borderlight">
+                <p class="text-muted mb-1">Paket Langganan</p>
+                <p id="plan_display" class="font-semibold text-gray-900">
+                  Gratis
+                </p>
+                <p id="plan_note" class="text-xs text-muted mt-1">
+                  Upgrade ke paket premium untuk mengakses lebih banyak materi dan latihan.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- RIGHT: FORM EDIT PROFIL -->
+          <section class="bg-white rounded-3xl border border-borderlight shadow-md p-6 sm:p-7">
+            <h2 class="font-lexend text-2xl font-semibold mb-4">
+              Edit Profil
+            </h2>
+
+            <form id="profile-form" class="space-y-5">
+              <!-- Nama -->
+              <div>
+                <label for="full_name" class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+                  Nama Lengkap
+                </label>
+                <input
+                  type="text"
+                  id="full_name"
+                  class="w-full px-4 py-2.5 rounded-2xl border border-borderlight bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Nama lengkap sesuai sertifikat"
+                />
+              </div>
+
+              <!-- Nomor Telepon -->
+              <div>
+                <label for="phone" class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+                  Nomor Telepon / WhatsApp
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-2.5 rounded-2xl border border-borderlight bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="0812xxxxxxx"
+                  required
+                />
+              </div>
+
+              <!-- Institusi -->
+              <div>
+                <label for="institution" class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+                  Institusi
+                </label>
+                <input
+                  type="text"
+                  id="institution"
+                  class="w-full px-4 py-2.5 rounded-2xl border border-borderlight bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="contoh: UPN Veteran Jakarta"
+                />
+              </div>
+
+              <!-- Bio -->
+              <div>
+                <label for="bio" class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+                  Deskripsi Singkat / Bio
+                </label>
+                <textarea
+                  id="bio"
+                  rows="4"
+                  class="w-full px-4 py-2.5 rounded-2xl border border-borderlight bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none"
+                  placeholder="Ceritakan sedikit tentang minat kamu di bidang Cyber Security..."></textarea>
+              </div>
+
+              <!-- Error / success -->
+              <p id="error-text" class="text-sm text-red-600 font-mont hidden"></p>
+              <p id="success-text" class="text-sm text-green-600 font-mont hidden"></p>
+
+              <!-- Tombol -->
+              <div class="pt-2">
+                <button
+                  id="save-btn"
+                  type="submit"
+                  class="w-full px-4 py-3 rounded-2xl bg-primary text-white font-mont font-semibold text-sm shadow-md">
+                  Simpan Perubahan
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary mt-8">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+        <p class="text-center text-white text-xs sm:text-sm font-mont">
+          © 2025 KSM Cyber Security — E-Learning Platform.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- SCRIPT: Supabase & Profile Logic -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseAnonKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+    const emailDisplay = document.getElementById("email_display");
+    const nameDisplay = document.getElementById("name_display");
+    const phoneDisplay = document.getElementById("phone_display");
+    const institutionDisplay = document.getElementById("institution_display");
+    const planDisplay = document.getElementById("plan_display");
+
+    const fullNameInput = document.getElementById("full_name");
+    const phoneInput = document.getElementById("phone");
+    const institutionInput = document.getElementById("institution");
+    const bioInput = document.getElementById("bio");
+
+    const errorText = document.getElementById("error-text");
+    const successText = document.getElementById("success-text");
+    const saveBtn = document.getElementById("save-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    let currentUserId = null;
+    let currentUserEmail = null;
+
+    async function loadProfile() {
+      // Ambil session
+      const { data, error } = await supabase.auth.getSession();
+
+      if (error) {
+        console.error("Gagal mengambil session:", error);
+        window.location.href = "login.html";
+        return;
+      }
+
+      if (!data.session) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const user = data.session.user;
+      currentUserId = user.id;
+      currentUserEmail = user.email;
+
+      const meta = user.user_metadata || {};
+
+      // Tampilkan dari Auth
+      emailDisplay.textContent = user.email || "-";
+      nameDisplay.textContent = meta.full_name || "-";
+      phoneDisplay.textContent = meta.phone || "-";
+      institutionDisplay.textContent = meta.institution || "-";
+
+      fullNameInput.value = meta.full_name || "";
+      phoneInput.value = meta.phone || "";
+      institutionInput.value = meta.institution || "";
+      bioInput.value = meta.bio || "";
+
+      // Ambil data dari Db_Pengguna
+      try {
+        const { data: pengguna, error: penggunaError } = await supabase
+          .from("Db_Pengguna")
+          .select("role, status_langganan, institusi, deskripsi_profile, nomor_telepon, nama_pengguna")
+          .eq("id_pengguna", currentUserId)
+          .maybeSingle();
+
+        if (penggunaError) {
+          console.error("Gagal ambil Db_Pengguna:", penggunaError);
+        } else if (pengguna) {
+          if (pengguna.nama_pengguna) {
+            nameDisplay.textContent = pengguna.nama_pengguna;
+            if (!fullNameInput.value) fullNameInput.value = pengguna.nama_pengguna;
+          }
+          if (pengguna.nomor_telepon) {
+            phoneDisplay.textContent = pengguna.nomor_telepon;
+            if (!phoneInput.value) phoneInput.value = pengguna.nomor_telepon;
+          }
+          if (pengguna.institusi) {
+            institutionDisplay.textContent = pengguna.institusi;
+            if (!institutionInput.value) institutionInput.value = pengguna.institusi;
+          }
+          if (pengguna.deskripsi_profile) {
+            if (!bioInput.value) bioInput.value = pengguna.deskripsi_profile;
+          }
+
+          if (pengguna.status_langganan === true) {
+            planDisplay.textContent = "Premium";
+          } else {
+            planDisplay.textContent = "Gratis";
+          }
+        }
+      } catch (e) {
+        console.error("Error load Db_Pengguna:", e);
+      }
+    }
+
+    // Submit form profil
+    document.getElementById("profile-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      errorText.classList.add("hidden");
+      successText.classList.add("hidden");
+      errorText.textContent = "";
+      successText.textContent = "";
+
+      const full_name = fullNameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const institution = institutionInput.value.trim();
+      const bio = bioInput.value.trim();
+
+      if (!full_name) {
+        errorText.textContent = "Nama lengkap tidak boleh kosong.";
+        errorText.classList.remove("hidden");
+        return;
+      }
+
+      if (!phone) {
+        errorText.textContent = "Nomor telepon tidak boleh kosong.";
+        errorText.classList.remove("hidden");
+        return;
+      }
+
+      saveBtn.disabled = true;
+      const oldLabel = saveBtn.textContent;
+      saveBtn.textContent = "Menyimpan...";
+
+      // 1) Update Auth metadata
+      const { error: updateError } = await supabase.auth.updateUser({
+        data: {
+          full_name,
+          phone,
+          institution,
+          bio,
+        },
+      });
+
+      if (updateError) {
+        console.error("Gagal update auth user:", updateError);
+        errorText.textContent = updateError.message || "Gagal menyimpan profil.";
+        errorText.classList.remove("hidden");
+        saveBtn.disabled = false;
+        saveBtn.textContent = oldLabel;
+        return;
+      }
+
+      // 2) Upsert ke Db_Pengguna
+      if (currentUserId && currentUserEmail) {
+        try {
+          const { error: upsertError } = await supabase
+            .from("Db_Pengguna")
+            .upsert(
+              {
+                id_pengguna: currentUserId,
+                email_pengguna: currentUserEmail,
+                nama_pengguna: full_name,
+                nomor_telepon: phone,          // NOT NULL -> wajib ada
+                institusi: institution || "",
+                deskripsi_profile: bio || "",
+              },
+              { onConflict: "id_pengguna" }
+            );
+
+          if (upsertError) {
+            console.error("Gagal upsert Db_Pengguna:", upsertError);
+          }
+        } catch (e) {
+          console.error("Error upsert Db_Pengguna:", e);
+        }
+      }
+
+      // Update tampilan kiri
+      nameDisplay.textContent = full_name || "-";
+      phoneDisplay.textContent = phone || "-";
+      institutionDisplay.textContent = institution || "-";
+
+      successText.textContent = "Profil berhasil disimpan.";
+      successText.classList.remove("hidden");
+
+      saveBtn.disabled = false;
+      saveBtn.textContent = oldLabel;
+    });
+
+    // Logout
+    logoutBtn.addEventListener("click", async () => {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        alert("Gagal logout: " + error.message);
+        return;
+      }
+      window.location.href = "login.html";
+    });
+
+    // Load profil saat halaman dibuka
+    loadProfile();
+  </script>
+
+</body>
+</html>

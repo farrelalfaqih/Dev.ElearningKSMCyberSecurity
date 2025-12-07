@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up | E-Learning Cyber Security</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            borderlight: '#D9D9D9',
+            muted: '#909090',
+            softgreen: '#EEFBF3',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-softgreen/60 flex items-center justify-center">
+
+  <!-- Wrapper -->
+  <main class="w-full max-w-md px-6 relative">
+
+    <!-- Logo + Back -->
+    <div class="mb-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+          <img src="public/LogoHeader.png" alt="Logo" class="w-10 h-10 object-cover rounded-xl">
+        </div>
+        <div class="font-lexend leading-tight">
+          <div class="text-gray-800 text-xl font-bold">Cyber</div>
+          <div class="text-primary text-xl font-medium">Security</div>
+        </div>
+      </div>
+
+      <a href="index.html" class="text-sm font-mont text-muted hover:text-primary">
+        ← Kembali
+      </a>
+    </div>
+
+    <!-- Card -->
+    <section class="bg-white rounded-3xl shadow-xl border border-borderlight px-6 py-8 sm:px-8 sm:py-10">
+      <header class="mb-6 text-center">
+        <h1 class="font-lexend text-2xl sm:text-3xl font-semibold text-gray-900">
+          Buat Akun Baru
+        </h1>
+        <p class="mt-2 text-sm text-muted font-mont">
+          Daftar dan mulai belajar Cyber Security bersama kami.
+        </p>
+      </header>
+
+      <!-- FORM SIGN UP -->
+      <form id="signup-form" class="space-y-5" method="POST">
+
+        <!-- Nama -->
+        <div>
+          <label class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+            Nama Lengkap
+          </label>
+          <input
+            type="text"
+            name="nama"
+            required
+            class="w-full px-4 py-2.5 rounded-2xl border border-borderlight text-sm font-mont text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="contoh: Farrel Al Faqih"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full px-4 py-2.5 rounded-2xl border border-borderlight text-sm font-mont text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="contoh: nama@ksmcyber.ac.id"
+          />
+        </div>
+
+        <!-- Nomor Telepon -->
+        <div>
+          <label class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+            Nomor Telepon
+          </label>
+          <input
+            type="tel"
+            name="nomor_telepon"
+            required
+            class="w-full px-4 py-2.5 rounded-2xl border border-borderlight text-sm font-mont text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="contoh: 081234567890"
+          />
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            required
+            minlength="6"
+            class="w-full px-4 py-2.5 rounded-2xl border border-borderlight text-sm font-mont text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Minimal 6 karakter"
+          />
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <label class="block text-sm font-mont font-medium text-gray-800 mb-1.5">
+            Konfirmasi Password
+          </label>
+          <input
+            type="password"
+            name="confirm_password"
+            required
+            minlength="6"
+            class="w-full px-4 py-2.5 rounded-2xl border border-borderlight text-sm font-mont text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Ulangi password"
+          />
+        </div>
+
+        <!-- Error / Success -->
+        <p id="error-text" class="text-sm font-mont text-red-600 hidden"></p>
+        <p id="success-text" class="text-sm font-mont text-green-600 hidden"></p>
+
+        <!-- Tombol -->
+        <div class="pt-2">
+          <button
+            id="signup-button"
+            type="submit"
+            class="w-full inline-flex items-center justify-center px-4 py-3 rounded-2xl bg-primary text-white font-mont font-semibold text-base shadow-md">
+            Daftar
+          </button>
+        </div>
+      </form>
+
+      <!-- Divider -->
+      <div class="mt-6 flex items-center gap-3">
+        <span class="h-px flex-1 bg-borderlight"></span>
+        <span class="text-xs font-mont text-muted uppercase tracking-wide">atau</span>
+        <span class="h-px flex-1 bg-borderlight"></span>
+      </div>
+
+      <!-- Login link -->
+      <p class="mt-4 text-center text-sm font-mont text-gray-700">
+        Sudah punya akun?
+        <a href="login.html" class="text-primary font-semibold hover:underline">
+          Masuk di sini
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <!-- Supabase Sign-up Script (best practice: hanya ke Auth) -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseAnonKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+    const form = document.getElementById("signup-form");
+    const btn = document.getElementById("signup-button");
+    const errorText = document.getElementById("error-text");
+    const successText = document.getElementById("success-text");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      errorText.classList.add("hidden");
+      successText.classList.add("hidden");
+      errorText.textContent = "";
+      successText.textContent = "";
+
+      const formData = new FormData(form);
+      const nama = formData.get("nama")?.toString().trim();
+      const email = formData.get("email")?.toString().trim();
+      const nomorTelepon = formData.get("nomor_telepon")?.toString().trim();
+      const password = formData.get("password")?.toString().trim();
+      const confirmPassword = formData.get("confirm_password")?.toString().trim();
+
+      if (!nama || !email || !nomorTelepon || !password || !confirmPassword) {
+        errorText.textContent = "Semua field wajib diisi.";
+        errorText.classList.remove("hidden");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        errorText.textContent = "Konfirmasi password tidak sesuai.";
+        errorText.classList.remove("hidden");
+        return;
+      }
+
+      if (password.length < 6) {
+        errorText.textContent = "Password minimal 6 karakter.";
+        errorText.classList.remove("hidden");
+        return;
+      }
+
+      btn.disabled = true;
+      const oldLabel = btn.textContent;
+      btn.textContent = "Mendaftarkan...";
+
+      // ✅ HANYA DAFTAR KE AUTH + KIRIM EMAIL VERIFIKASI
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: nama,
+            phone: nomorTelepon,
+          },
+        },
+      });
+
+      if (error) {
+        const msg = error.message || "";
+
+        const isRateLimit = msg.includes("For security purposes");
+        const isAlreadyRegistered =
+          msg.toLowerCase().includes("already") ||
+          msg.toLowerCase().includes("exists");
+
+        if (isRateLimit || isAlreadyRegistered) {
+          successText.textContent =
+            "Akun sudah terdaftar / permintaan terlalu cepat. Silakan login.";
+          successText.classList.remove("hidden");
+
+          btn.disabled = false;
+          btn.textContent = oldLabel;
+
+          return setTimeout(() => {
+            window.location.href = "login.html";
+          }, 2000);
+        }
+
+        btn.disabled = false;
+        btn.textContent = oldLabel;
+        errorText.textContent = msg || "Gagal mendaftarkan akun.";
+        errorText.classList.remove("hidden");
+        return;
+      }
+
+      btn.disabled = false;
+      btn.textContent = oldLabel;
+      successText.textContent =
+        "Akun berhasil dibuat! Silakan cek email dan verifikasi sebelum login.";
+      successText.classList.remove("hidden");
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2500);
+    });
+  </script>
+
+</body>
+</html>

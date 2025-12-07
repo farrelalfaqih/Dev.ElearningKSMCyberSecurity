@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Home | E-Learning Cyber Security</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            borderlight: '#D9D9D9',
+            softgreen: '#EEFBF3',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+
+  <div class="min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <header class="bg-softgreen/60">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+        <div class="flex items-center justify-between gap-6">
+
+          <!-- Logo -->
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+              <img src="public/LogoHeader.png" class="w-14 h-14 rounded-xl" alt="Logo">
+            </div>
+            <div class="font-lexend leading-tight">
+              <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
+              <div class="text-primary text-3xl md:text-4xl font-medium">Security</div>
+            </div>
+          </div>
+
+          <!-- Menu -->
+          <nav class="hidden md:flex items-center gap-10 font-mont text-xl">
+            <a href="#" class="text-black">Home</a>
+            <a href="course.html" class="text-black">Course</a>
+            <a href="#blog" class="text-black">Blog</a>
+            <a href="#contact" class="text-black">Contact</a>
+          </nav>
+
+          <!-- BUTTON LOGIN / PROFILE (dinamis) -->
+          <div id="auth-btn-container" class="flex items-center"></div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-softgreen/60 pt-10 pb-16">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center gap-10">
+        <!-- Left text -->
+        <div class="flex-1 space-y-8">
+          <h1 class="font-lexend text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-snug">
+            <span class="text-primary font-medium">Mulai sekarang</span><br/>
+            <span class="text-black font-medium">belajar dimanapun<br/>kapanpun</span><br/>
+            <span class="text-primary font-medium">untuk masa depan</span>
+          </h1>
+
+          <div>
+            <a href="#course"
+               class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-primary text-white font-mont text-2xl font-bold shadow-md">
+              MULAI
+            </a>
+          </div>
+
+          <!-- Educate Protect Inovate -->
+          <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-white shadow-md mt-4">
+            <p class="font-lexend text-xl md:text-2xl">
+              <span class="text-black font-medium">Educate, </span>
+              <span class="text-primary font-medium">Protect,</span>
+              <span class="text-black font-medium"> Inovate</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Right image -->
+        <div class="flex-1 flex justify-center">
+          <img src="public/P.Header.png"
+               alt="Ilustrasi belajar cyber security"
+               class="object-cover">
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY STRIP -->
+    <section id="course" class="bg-white py-10">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-wrap gap-4 justify-between">
+          <div class="flex-1 min-w-[140px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">CTF</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[160px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">Reverse Eng.</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[140px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">Network</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[140px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">Defence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSE CARDS -->
+    <section class="bg-white py-10">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
+            <img src="public/P.1.Sec2.png"
+                 alt="Basic Linux"
+                 class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-2xl font-semibold mb-2">Basic Linux</h3>
+            <p class="font-mont text-base text-black mb-6">
+              Tutorial memahami cara kerja Linux dan command line dasar dari Linux.
+            </p>
+            <div class="mt-auto">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+                Mulai
+              </button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
+            <img src="public/P.2.Sec2.png"
+                 alt="Basic System Operation"
+                 class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-2xl font-semibold mb-2">Basic System Operation</h3>
+            <p class="font-mont text-base text-black mb-6">
+              Tutorial memahami cara kerja Sistem Operasi dan berbagai jenis SO yang ada.
+            </p>
+            <div class="mt-auto">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+                Mulai
+              </button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
+            <img src="public/P.3.Sec2.png"
+                 alt="Membuat Sertifikat SSL"
+                 class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-2xl font-semibold mb-2">Membuat Sertifikat SSL</h3>
+            <p class="font-mont text-base text-black mb-6">
+              Tutorial memahami cara membuat Sertifikat SSL untuk website.
+            </p>
+            <div class="mt-auto">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+                Mulai
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- BUTTON LAINNYA -->
+        <div class="flex justify-center mt-10">
+          <button
+            class="px-10 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-2xl text-center">
+            Lainnya
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO USE E-LEARNING -->
+    <section class="bg-softgreen/60 py-14" id="blog">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="bg-softgreen rounded-3xl px-4 sm:px-8 lg:px-12 py-10">
+          <h2 class="font-lexend text-3xl sm:text-4xl text-center mb-2">
+            <span class="text-primary font-medium">Cara Menggunakan E-Learning </span>
+            <span class="text-gray-800 font-bold">KSM Cyber Security</span>
+          </h2>
+
+          <div class="mt-10 grid md:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
+                <img src="public/P.1.Sec3.png" alt="Tonton" class="w-16 h-16">
+              </div>
+              <h3 class="font-mont text-2xl mb-2">Tonton Vidionya</h3>
+              <p class="font-mont text-lg font-light">
+                Belajar Cyber Security melalui video yang telah tersedia.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
+                <img src="public/P.2.Sec3.png" alt="Kerjakan Soalnya" class="w-16 h-16">
+              </div>
+              <h3 class="font-mont text-2xl mb-2">Kerjakan Soalnya</h3>
+              <p class="font-mont text-lg font-light">
+                Kerjakan soal yang tersedia untuk menyelesaikan materi.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
+                <img src="public/P.3.Sec3.png" alt="Sertifikat" class="w-16 h-16">
+              </div>
+              <h3 class="font-mont text-2xl mb-2">Dapatkan Sertifikat</h3>
+              <p class="font-mont text-lg font-light">
+                Dapatkan sertifikat setelah menyelesaikan seluruh langkah dan evaluasi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALUMNI SPREAD -->
+    <section class="bg-white py-14">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="bg-softgreen rounded-3xl border border-primary px-6 sm:px-10 lg:px-14 py-8 flex flex-col lg:flex-row items-center gap-6">
+          <div class="font-lexend text-3xl sm:text-4xl">
+            <span class="text-black font-normal">Pesebaran</span><br/>
+            <span class="text-primary font-medium">Alumni</span>
+          </div>
+          <div class="flex-1 flex flex-wrap justify-center gap-6">
+            <img src="public/P.1.Sec4.png" alt="Logo perusahaan 1" class="h-16 object-contain">
+            <img src="public/P.2.Sec4.png" alt="Logo perusahaan 2" class="h-16 object-contain">
+            <img src="public/P.3.Sec4.png" alt="Logo perusahaan 3" class="h-16 object-contain">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI ALUMNI -->
+    <section class="bg-white pb-16" id="contact">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-10 items-start">
+          <!-- Title -->
+          <div class="flex-1">
+            <h2 class="font-lexend text-4xl sm:text-5xl md:text-6xl leading-tight mb-4">
+              <span class="text-black font-medium">Apa Kata<br/></span>
+              <span class="text-primary font-bold">Alumni</span>
+            </h2>
+          </div>
+
+          <!-- Card -->
+          <div class="flex-[1.5]">
+            <div class="bg-softgreen rounded-3xl border border-primary px-6 sm:px-10 py-8 flex flex-col lg:flex-row gap-8 items-center">
+              <div class="flex flex-col items-center lg:items-start">
+                <img src="public/P.1.Sec5.png"
+                     alt="Akmal Ilmi"
+                     class="w-40 h-40 rounded-xl border border-primary object-cover mb-4">
+                <div class="text-center lg:text-left">
+                  <div class="font-lexend text-primary text-3xl font-bold leading-tight">
+                    Akmal Ilmi
+                  </div>
+                  <div class="font-lexend text-stone-900 text-2xl">
+                    Penetration Tester
+                  </div>
+                </div>
+              </div>
+
+              <p class="font-mont text-lg leading-relaxed text-black text-justify">
+                KSM Cyber Security membantu saya untuk membangun jaringan dalam dunia pekerjaan.
+                Saat ini dunia cyber security memiliki peranan penting dalam membangun dunia
+                internet yang aman. Oleh karena itu, cyber security bakal menjadi incaran
+                dalam dunia pekerjaan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary mt-auto">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6">
+        <p class="text-center text-white font-mont text-sm md:text-base">
+          © 2025 KSM Cyber Security — E-Learning Platform.
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SUPABASE LOGIN CHECK -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const container = document.getElementById("auth-btn-container");
+
+    async function loadUser() {
+      const { data: session } = await supabase.auth.getSession();
+
+      if (!session.session) {
+        container.innerHTML = `
+          <a href="login.html"
+             class="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-primary text-white font-mont text-xl font-bold shadow-md">
+            LOGIN
+          </a>`;
+        return;
+      }
+
+      const user = session.session.user;
+      const avatar =
+        user.user_metadata?.avatar_url ||
+        "https://ui-avatars.com/api/?name=" +
+          encodeURIComponent(user.email) +
+          "&background=309255&color=fff";
+
+      container.innerHTML = `
+        <a href="profile.html" class="flex items-center gap-3">
+          <img src="${avatar}" class="w-10 h-10 rounded-full border border-primary object-cover">
+          <span class="font-mont text-xl text-black font-semibold">Profile</span>
+        </a>
+      `;
+    }
+
+    loadUser();
+  </script>
+
+</body>
+</html>

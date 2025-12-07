@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Course | E-Learning Cyber Security</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            darkcard: '#222A34',
+            muted: '#909090',
+            borderlight: '#D9D9D9',
+            softgreen: '#EEFBF3',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <div class="min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <header class="bg-softgreen/60">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+        <div class="flex items-center justify-between gap-6">
+          <!-- Logo + Brand -->
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+              <img src="public\LogoHeader.png" alt="Logo" class="w-14 h-14 rounded-xl object-cover">
+            </div>
+            <div class="font-lexend leading-tight">
+              <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
+              <div class="text-primary text-3xl md:text-4xl font-normal">Security</div>
+            </div>
+          </div>
+
+          <!-- Menu -->
+          <nav class="hidden md:flex items-center gap-10 font-mont text-xl">
+            <a href="homebase.html" class="text-black">Home</a>
+            <a href="course.html" class="text-black font-semibold">Course</a>
+            <a href="#blog" class="text-black">Blog</a>
+            <a href="#contact" class="text-black">Contact</a>
+          </nav>
+
+          <!-- Login Button (bisa diganti profile kalau mau dynamic) -->
+          <div class="flex items-center">
+            <a href="login.html"
+               class="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-primary text-white font-mont text-xl font-bold shadow-md">
+              LOGIN
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO: IMAGE + MASKOT + TAGLINE -->
+    <section class="relative bg-softgreen/60 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-10 lg:py-12">
+        <div class="grid lg:grid-cols-[0.8fr,1.2fr] gap-8 items-center">
+
+          <!-- Maskot / gambar kiri -->
+          <div class="flex justify-center lg:justify-start">
+            <div class="relative">
+              <!-- Lingkaran dekor -->
+              <div class="absolute inset-0 -z-10">
+                <div class="w-60 h-60 rounded-full bg-primary/20 blur-3xl"></div>
+              </div>
+              <img
+                src="public\Course.P.MyCourseHeader.png"
+                alt="MyCourse"
+                class="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-xl">
+            </div>
+          </div>
+
+          <!-- Gambar besar kanan + tagline -->
+          <div class="relative">
+            <img
+              src="public\Course.P.Header.Course.png"
+              alt="Ilustrasi belajar cyber security"
+              class="object-cover">
+
+            <div class="flex justify-end mt-4">
+              <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-softgreen shadow-md">
+                <p class="font-lexend text-xl md:text-2xl">
+                  <span class="text-black font-medium">Educate, </span>
+                  <span class="text-primary font-medium">Protect,</span>
+                  <span class="text-black font-medium"> Inovate</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTER / SEARCH BAR -->
+    <section class="bg-white py-10">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-col lg:flex-row gap-4">
+          <!-- All Course -->
+          <button
+            class="flex-1 min-w-[160px] h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center font-mont text-gray-800 text-2xl">
+            All Course
+          </button>
+
+          <!-- Progres -->
+          <button
+            class="flex-1 min-w-[160px] h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center font-mont text-gray-800 text-2xl">
+            Progres
+          </button>
+
+          <!-- Search -->
+          <div class="flex-[1.4] min-w-[220px] h-20 bg-white border border-borderlight rounded-2xl flex items-center px-4 gap-3">
+            <span class="hidden sm:inline-block text-muted">
+              🔍
+            </span>
+            <input
+              type="text"
+              placeholder="Search"
+              class="w-full bg-transparent outline-none font-mont text-2xl text-gray-800 placeholder:text-gray-500" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSE CARDS -->
+    <section class="bg-white pb-16">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
+            <img
+              src="https://placehold.co/445x232"
+              alt="Basic Linux"
+              class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-3xl font-semibold mb-2 text-black">
+              Basic Linux
+            </h3>
+            <p class="font-mont text-xl text-black mb-6">
+              Tutorial memahami cara kerja Linux dan command line dasar dari Linux.
+            </p>
+            <div class="mt-auto">
+              <button
+                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+                Mulai
+              </button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
+            <img
+              src="https://placehold.co/445x232"
+              alt="Basic System Operation"
+              class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-3xl font-semibold mb-2 text-black">
+              Basic System Operation
+            </h3>
+            <p class="font-mont text-xl text-black mb-6">
+              Tutorial memahami cara kerja SO dan berbagai jenis SO yang ada.
+            </p>
+            <div class="mt-auto">
+              <button
+                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+                Mulai
+              </button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
+            <img
+              src="https://placehold.co/445x232"
+              alt="Membuat Sertifikat SSL"
+              class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-3xl font-semibold mb-2 text-black">
+              Membuat Sertifikat SSL
+            </h3>
+            <p class="font-mont text-xl text-black mb-6">
+              Tutorial memahami cara membuat Sertifikat SSL untuk website.
+            </p>
+            <div class="mt-auto">
+              <button
+                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+                Mulai
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary mt-auto">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6">
+        <p class="text-center text-white font-mont text-sm md:text-base">
+          © 2025 KSM Cyber Security — E-Learning Platform.
+        </p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
