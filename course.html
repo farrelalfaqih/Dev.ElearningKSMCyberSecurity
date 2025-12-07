@@ -3,20 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Course | E-Learning Cyber Security</title>
+  <title>E-Learning Cyber Security</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind CDN (untuk dev; nanti bisa di-build sendiri untuk production) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: '#309255',
+            darkbg: '#000000',
+            darknav: '#1E1E1E',
             darkcard: '#222A34',
+            primary: '#309255',
             muted: '#909090',
             borderlight: '#D9D9D9',
             softgreen: '#EEFBF3',
@@ -37,6 +39,8 @@
   </style>
 </head>
 <body class="bg-white text-gray-800">
+
+  <!-- Wrapper -->
   <div class="min-h-screen flex flex-col">
 
     <!-- NAVBAR -->
@@ -46,23 +50,23 @@
           <!-- Logo + Brand -->
           <div class="flex items-center gap-4">
             <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
-              <img src="public\LogoHeader.png" alt="Logo" class="w-14 h-14 rounded-xl object-cover">
+              <img src="image\LogoHeader.png" alt="Logo" class="w-14 h-14 object-cover rounded-xl">
             </div>
             <div class="font-lexend leading-tight">
               <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
-              <div class="text-primary text-3xl md:text-4xl font-normal">Security</div>
+              <div class="text-primary text-3xl md:text-4xl font-medium">Security</div>
             </div>
           </div>
 
           <!-- Menu -->
           <nav class="hidden md:flex items-center gap-10 font-mont text-xl">
-            <a href="homebase.html" class="text-black">Home</a>
-            <a href="course.html" class="text-black font-semibold">Course</a>
+            <a href="#" class="text-black">Home</a>
+            <a href="#course" class="text-black">Course</a>
             <a href="#blog" class="text-black">Blog</a>
             <a href="#contact" class="text-black">Contact</a>
           </nav>
 
-          <!-- Login Button (bisa diganti profile kalau mau dynamic) -->
+          <!-- Login Button -->
           <div class="flex items-center">
             <a href="login.html"
                class="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-primary text-white font-mont text-xl font-bold shadow-md">
@@ -73,96 +77,88 @@
       </div>
     </header>
 
-    <!-- HERO: IMAGE + MASKOT + TAGLINE -->
-    <section class="relative bg-softgreen/60 overflow-hidden">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-10 lg:py-12">
-        <div class="grid lg:grid-cols-[0.8fr,1.2fr] gap-8 items-center">
+    <!-- HERO SECTION -->
+    <section class="relative bg-softgreen/60 pt-10 pb-16">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center gap-10">
+        <!-- Left text -->
+        <div class="flex-1 space-y-8">
+          <h1 class="font-lexend text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-snug">
+            <span class="text-primary font-medium">Mulai sekarang</span><br/>
+            <span class="text-black font-medium">belajar dimanapun<br/>kapanpun</span><br/>
+            <span class="text-primary font-medium">untuk masa depan</span>
+          </h1>
 
-          <!-- Maskot / gambar kiri -->
-          <div class="flex justify-center lg:justify-start">
-            <div class="relative">
-              <!-- Lingkaran dekor -->
-              <div class="absolute inset-0 -z-10">
-                <div class="w-60 h-60 rounded-full bg-primary/20 blur-3xl"></div>
-              </div>
-              <img
-                src="public\Course.P.MyCourseHeader.png"
-                alt="MyCourse"
-                class="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-xl">
-            </div>
+          <div>
+            <a href="#course"
+               class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-primary text-white font-mont text-2xl font-bold shadow-md">
+              MULAI
+            </a>
           </div>
 
-          <!-- Gambar besar kanan + tagline -->
-          <div class="relative">
-            <img
-              src="public\Course.P.Header.Course.png"
-              alt="Ilustrasi belajar cyber security"
-              class="object-cover">
-
-            <div class="flex justify-end mt-4">
-              <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-softgreen shadow-md">
-                <p class="font-lexend text-xl md:text-2xl">
-                  <span class="text-black font-medium">Educate, </span>
-                  <span class="text-primary font-medium">Protect,</span>
-                  <span class="text-black font-medium"> Inovate</span>
-                </p>
-              </div>
-            </div>
+          <!-- Educate Protect Inovate: di bawah tombol, rectangle putih -->
+          <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-white shadow-md mt-4">
+            <p class="font-lexend text-xl md:text-2xl">
+              <span class="text-black font-medium">Educate, </span>
+              <span class="text-primary font-medium">Protect,</span>
+              <span class="text-black font-medium"> Inovate</span>
+            </p>
           </div>
+        </div>
 
+        <!-- Right image -->
+        <div class="flex-1 flex justify-center">
+          <img src="image\P.Header.png"
+               alt="Ilustrasi belajar cyber security"
+               class="object-cover">
         </div>
       </div>
     </section>
 
-    <!-- FILTER / SEARCH BAR -->
-    <section class="bg-white py-10">
+    <!-- CATEGORY STRIP -->
+    <section id="course" class="bg-white py-10">
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-col lg:flex-row gap-4">
-          <!-- All Course -->
-          <button
-            class="flex-1 min-w-[160px] h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center font-mont text-gray-800 text-2xl">
-            All Course
-          </button>
-
-          <!-- Progres -->
-          <button
-            class="flex-1 min-w-[160px] h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center font-mont text-gray-800 text-2xl">
-            Progres
-          </button>
-
-          <!-- Search -->
-          <div class="flex-[1.4] min-w-[220px] h-20 bg-white border border-borderlight rounded-2xl flex items-center px-4 gap-3">
-            <span class="hidden sm:inline-block text-muted">
-              🔍
-            </span>
-            <input
-              type="text"
-              placeholder="Search"
-              class="w-full bg-transparent outline-none font-mont text-2xl text-gray-800 placeholder:text-gray-500" />
+        <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-wrap gap-4 justify-between">
+          <div class="flex-1 min-w-[140px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">CTF</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[160px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">Reverse Eng.</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[140px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">Network</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[140px]">
+            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
+              <span class="font-mont text-gray-800 text-2xl">Defence</span>
+            </div>
           </div>
         </div>
+
+        <!-- BUTTON LAINNYA DIPINDAH KE BAWAH CARD (hapus dari sini) -->
       </div>
     </section>
 
     <!-- COURSE CARDS -->
-    <section class="bg-white pb-16">
+    <section class="bg-white py-10">
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Card 1 -->
           <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
-            <img
-              src="https://placehold.co/445x232"
-              alt="Basic Linux"
-              class="w-full h-48 object-cover rounded-2xl mb-4">
-            <h3 class="font-mont text-3xl font-semibold mb-2 text-black">
-              Basic Linux
-            </h3>
-            <p class="font-mont text-xl text-black mb-6">
+            <img src="image\P.1.Sec2.png"
+                 alt="Basic Linux"
+                 class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-2xl font-semibold mb-2">Basic Linux</h3>
+            <p class="font-mont text-base text-black mb-6">
               Tutorial memahami cara kerja Linux dan command line dasar dari Linux.
             </p>
             <div class="mt-auto">
-              <button
-                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
                 Mulai
               </button>
             </div>
@@ -170,19 +166,15 @@
 
           <!-- Card 2 -->
           <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
-            <img
-              src="https://placehold.co/445x232"
-              alt="Basic System Operation"
-              class="w-full h-48 object-cover rounded-2xl mb-4">
-            <h3 class="font-mont text-3xl font-semibold mb-2 text-black">
-              Basic System Operation
-            </h3>
-            <p class="font-mont text-xl text-black mb-6">
-              Tutorial memahami cara kerja SO dan berbagai jenis SO yang ada.
+            <img src="image\P.2.Sec2.png"
+                 alt="Basic System Operation"
+                 class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-2xl font-semibold mb-2">Basic System Operation</h3>
+            <p class="font-mont text-base text-black mb-6">
+              Tutorial memahami cara kerja Sistem Operasi dan berbagai jenis SO yang ada.
             </p>
             <div class="mt-auto">
-              <button
-                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
                 Mulai
               </button>
             </div>
@@ -190,23 +182,132 @@
 
           <!-- Card 3 -->
           <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
-            <img
-              src="https://placehold.co/445x232"
-              alt="Membuat Sertifikat SSL"
-              class="w-full h-48 object-cover rounded-2xl mb-4">
-            <h3 class="font-mont text-3xl font-semibold mb-2 text-black">
-              Membuat Sertifikat SSL
-            </h3>
-            <p class="font-mont text-xl text-black mb-6">
+            <img src="image\P.3.Sec2.png"
+                 alt="Membuat Sertifikat SSL"
+                 class="w-full h-48 object-cover rounded-2xl mb-4">
+            <h3 class="font-mont text-2xl font-semibold mb-2">Membuat Sertifikat SSL</h3>
+            <p class="font-mont text-base text-black mb-6">
               Tutorial memahami cara membuat Sertifikat SSL untuk website.
             </p>
             <div class="mt-auto">
-              <button
-                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
                 Mulai
               </button>
             </div>
           </article>
+        </div>
+
+        <!-- BUTTON LAINNYA SEKARANG DI BAWAH CARD -->
+        <div class="flex justify-center mt-10">
+          <button
+            class="px-10 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-2xl text-center">
+            Lainnya
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO USE E-LEARNING -->
+    <section class="bg-softgreen/60 py-14" id="blog">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="bg-softgreen rounded-3xl px-4 sm:px-8 lg:px-12 py-10">
+          <h2 class="font-lexend text-3xl sm:text-4xl text-center mb-2">
+            <span class="text-primary font-medium">Cara Menggunakan E-Learning </span>
+            <span class="text-gray-800 font-bold">KSM Cyber Security</span>
+          </h2>
+
+          <div class="mt-10 grid md:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
+                <img src="image\P.1.Sec3.png" alt="Tonton" class="w-16 h-16">
+              </div>
+              <h3 class="font-mont text-2xl mb-2">Tonton Vidionya</h3>
+              <p class="font-mont text-lg font-light">
+                Belajar Cyber Security melalui video yang telah tersedia.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
+                <img src="image\P.2.Sec3.png" alt="Kerjakan Soalnya" class="w-16 h-16">
+              </div>
+              <h3 class="font-mont text-2xl mb-2">Kerjakan Soalnya</h3>
+              <p class="font-mont text-lg font-light">
+                Kerjakan soal yang tersedia untuk menyelesaikan materi.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
+              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
+                <img src="image\P.3.Sec3.png" alt="Sertifikat" class="w-16 h-16">
+              </div>
+              <h3 class="font-mont text-2xl mb-2">Dapatkan Sertifikat</h3>
+              <p class="font-mont text-lg font-light">
+                Dapatkan sertifikat setelah menyelesaikan seluruh langkah dan evaluasi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALUMNI SPREAD -->
+    <section class="bg-white py-14">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="bg-softgreen rounded-3xl border border-primary px-6 sm:px-10 lg:px-14 py-8 flex flex-col lg:flex-row items-center gap-6">
+          <div class="font-lexend text-3xl sm:text-4xl">
+            <span class="text-black font-normal">Pesebaran</span><br/>
+            <span class="text-primary font-medium">Alumni</span>
+          </div>
+          <div class="flex-1 flex flex-wrap justify-center gap-6">
+            <img src="image\P.1.Sec4.png" alt="Logo perusahaan 1" class="h-16 object-contain">
+            <img src="image\P.2.Sec4.png" alt="Logo perusahaan 2" class="h-16 object-contain">
+            <img src="image\P.3.Sec4.png" alt="Logo perusahaan 3" class="h-16 object-contain">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI ALUMNI -->
+    <section class="bg-white pb-16" id="contact">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-10 items-start">
+          <!-- Title -->
+          <div class="flex-1">
+            <h2 class="font-lexend text-4xl sm:text-5xl md:text-6xl leading-tight mb-4">
+              <span class="text-black font-medium">Apa Kata<br/></span>
+              <span class="text-primary font-bold">Alumni</span>
+            </h2>
+          </div>
+
+          <!-- Card -->
+          <div class="flex-[1.5]">
+            <div class="bg-softgreen rounded-3xl border border-primary px-6 sm:px-10 py-8 flex flex-col lg:flex-row gap-8 items-center">
+              <div class="flex flex-col items-center lg:items-start">
+                <img src="image\P.1.Sec5.png"
+                     alt="Akmal Ilmi"
+                     class="w-40 h-40 rounded-xl border border-primary object-cover mb-4">
+                <div class="text-center lg:text-left">
+                  <div class="font-lexend text-primary text-3xl font-bold leading-tight">
+                    Akmal Ilmi
+                  </div>
+                  <div class="font-lexend text-stone-900 text-2xl">
+                    Penetration Tester
+                  </div>
+                </div>
+              </div>
+
+              <p class="font-mont text-lg leading-relaxed text-black text-justify">
+                KSM Cyber Security membantu saya untuk membangun jaringan dalam dunia pekerjaan.
+                Saat ini dunia cyber security memiliki peranan penting dalam membangun dunia
+                internet yang aman. Oleh karena itu, cyber security bakal menjadi incaran
+                dalam dunia pekerjaan.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -223,3 +324,4 @@
   </div>
 </body>
 </html>
+
