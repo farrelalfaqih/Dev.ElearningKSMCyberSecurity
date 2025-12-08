@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact | E-Learning Cyber Security</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            darkbg: '#000000',
+            darknav: '#1E1E1E',
+            darkcard: '#222A34',
+            primary: '#309255',
+            muted: '#909090',
+            borderlight: '#D9D9D9',
+            softgreen: '#EEFBF3',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- WRAPPER -->
+  <div class="min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <header class="bg-softgreen/60">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+        <div class="flex items-center justify-between gap-6">
+          <!-- Logo + Brand -->
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+              <img src="image/LogoHeader.png" alt="Logo" class="w-14 h-14 object-cover rounded-xl">
+            </div>
+            <div class="font-lexend leading-tight">
+              <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
+              <div class="text-primary text-3xl md:text-4xl font-medium">Security</div>
+            </div>
+          </div>
+
+          <!-- NAVIGATION -->
+          <nav class="hidden md:flex items-center gap-4 font-mont text-xl">
+            <a href="index.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black 
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Home
+            </a>
+
+            <a href="course.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Course
+            </a>
+
+            <a href="index.html#blog"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Blog
+            </a>
+
+            <!-- CONTACT aktif di halaman ini -->
+            <a href="contact.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      bg-primary text-white font-semibold">
+              Contact
+            </a>
+          </nav>
+
+          <!-- LOGIN BUTTON -->
+          <div class="flex items-center">
+            <a href="login.html"
+               class="inline-flex items-center justify-center px-6 py-3 rounded-2xl 
+                      bg-primary text-white font-mont text-xl font-bold shadow-md
+                      border border-transparent
+                      transition-all duration-200
+                      hover:bg-white hover:text-primary hover:border-primary hover:shadow-lg">
+              LOGIN
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO / INTRO CONTACT -->
+    <section class="bg-softgreen/60 py-10">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+          <div class="flex-1 space-y-4">
+            <h1 class="font-lexend text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+              Hubungi KSM Cyber Security
+            </h1>
+            <p class="font-mont text-lg text-gray-700 max-w-2xl">
+              Punya pertanyaan seputar e-learning, pendaftaran, atau kendala teknis?
+              Kirim pesan ke kami melalui form di bawah ini. Tim kami akan merespons
+              secepat mungkin di jam operasional.
+            </p>
+            <p class="font-mont text-sm text-muted">
+              Jam respon: <span class="font-semibold text-gray-800">Senin – Minggu, 10.00 – 21.00 WIB</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM + INFO -->
+    <section class="bg-white py-12">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-2 gap-10">
+        
+        <!-- FORM KONTAK -->
+        <div class="bg-softgreen rounded-3xl p-6 sm:p-8">
+          <h2 class="font-lexend text-2xl sm:text-3xl mb-4 text-gray-900">
+            Kirim Pesan
+          </h2>
+          <p class="font-mont text-sm text-gray-700 mb-6">
+            Isi form berikut untuk menghubungi admin. Gunakan email aktif agar kami bisa membalas pesanmu.
+          </p>
+
+          <form class="space-y-4" action="#" method="post">
+            <!-- Nama -->
+            <div>
+              <label for="nama" class="block text-sm font-medium text-gray-800 mb-1">
+                Nama Lengkap
+              </label>
+              <input id="nama" name="nama" type="text" required
+                     class="w-full rounded-2xl border border-borderlight px-4 py-2.5
+                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+                            text-sm sm:text-base">
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-800 mb-1">
+                Email
+              </label>
+              <input id="email" name="email" type="email" required
+                     class="w-full rounded-2xl border border-borderlight px-4 py-2.5
+                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+                            text-sm sm:text-base">
+            </div>
+
+            <!-- Kategori -->
+            <div>
+              <label for="kategori" class="block text-sm font-medium text-gray-800 mb-1">
+                Kategori Pesan
+              </label>
+              <select id="kategori" name="kategori"
+                      class="w-full rounded-2xl border border-borderlight px-4 py-2.5
+                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+                             bg-white text-sm sm:text-base">
+                <option value="umum">Pertanyaan Umum</option>
+                <option value="akun">Kendala Akun / Login</option>
+                <option value="course">Kursus & Materi</option>
+                <option value="kritik_saran">Kritik & Saran</option>
+              </select>
+            </div>
+
+            <!-- Subjek -->
+            <div>
+              <label for="subjek" class="block text-sm font-medium text-gray-800 mb-1">
+                Subjek
+              </label>
+              <input id="subjek" name="subjek" type="text"
+                     class="w-full rounded-2xl border border-borderlight px-4 py-2.5
+                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+                            text-sm sm:text-base">
+            </div>
+
+            <!-- Pesan -->
+            <div>
+              <label for="pesan" class="block text-sm font-medium text-gray-800 mb-1">
+                Pesan
+              </label>
+              <textarea id="pesan" name="pesan" rows="4" required
+                        class="w-full rounded-2xl border border-borderlight px-4 py-2.5
+                               focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+                               text-sm sm:text-base resize-none"></textarea>
+            </div>
+
+            <!-- Tombol Kirim -->
+            <div class="pt-2">
+              <button type="submit"
+                      class="w-full sm:w-auto px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-lg
+                             shadow-md transition-all duration-200
+                             hover:bg-white hover:text-primary hover:border hover:border-primary hover:shadow-lg">
+                Kirim Pesan
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- INFO KONTAK + SOSIAL -->
+        <div class="space-y-8">
+          <!-- Info Kontak -->
+          <div>
+            <h2 class="font-lexend text-2xl sm:text-3xl mb-4 text-gray-900">
+              Info Kontak
+            </h2>
+            <div class="space-y-3 font-mont text-sm sm:text-base">
+              <p>
+                <span class="font-semibold text-gray-900">Email Resmi:</span><br>
+                <span class="text-primary">cybersecurity@upnvj.ac.id</span>
+              </p>
+              <p>
+                <span class="font-semibold text-gray-900">Lokasi di:</span><br>
+                Fakultas Ilmu Komputer, UPN Veteran Jakarta.
+              </p>
+              <p>
+                <span class="font-semibold text-gray-900">Jam Respon:</span><br>
+                Senin – Minggu, 10.00 – 21.00 WIB.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sosial Media -->
+          <div>
+            <h3 class="font-lexend text-xl mb-3 text-gray-900">
+              Sosial Media
+            </h3>
+            <div class="space-y-2 font-mont text-sm sm:text-base">
+              <p>
+                Instagram: <span class="text-primary">@ksmcyber.upnvj</span>
+              </p>
+              <p>
+                TikTok: <span class="text-primary">@ksmcyber.upnvj</span>
+              </p>
+              <p>
+                YouTube: <span class="text-primary">KSM Cyber Security UPNVJ</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Info Tambahan -->
+          <div class="bg-softgreen rounded-3xl p-5 font-mont text-sm sm:text-base text-gray-800">
+            <p class="mb-1 font-semibold">Catatan:</p>
+            <p>
+              Untuk keperluan kerja sama, peminjaman narasumber, atau sponsorship,
+              silakan tulis subjek email dengan format
+              <span class="font-semibold"> <br>[KERJA SAMA] Nama Instansi - Keperluan</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="bg-softgreen/60 py-12">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <h2 class="font-lexend text-3xl sm:text-4xl text-center mb-8 text-gray-900">
+          Frequently Asked Questions (FAQ)
+        </h2>
+
+        <div class="space-y-4">
+          <!-- FAQ 1 -->
+          <div class="bg-white rounded-2xl border border-borderlight p-4 sm:p-5">
+            <h3 class="font-lexend text-lg sm:text-xl text-gray-900">
+              1. Apakah e-learning KSM Cyber Security gratis?
+            </h3>
+            <p class="font-mont text-sm sm:text-base text-gray-700 mt-2">
+              Seluruh materi tersedia gratis untuk member KSM. Namun, untuk ekstenal KSM akan ada biaya
+              kelas lanjutan atau bootcamp tertentu.
+            </p>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="bg-white rounded-2xl border border-borderlight p-4 sm:p-5">
+            <h3 class="font-lexend text-lg sm:text-xl text-gray-900">
+              2. Apakah saya harus menjadi member KSM untuk mengakses course?
+            </h3>
+            <p class="font-mont text-sm sm:text-base text-gray-700 mt-2">
+              Beberapa course terbuka untuk publik, namun course dengan jalur lengkap,
+              mentoring, dan sertifikat biasanya hanya tersedia untuk member resmi KSM Cyber Security.
+            </p>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="bg-white rounded-2xl border border-borderlight p-4 sm:p-5">
+            <h3 class="font-lexend text-lg sm:text-xl text-gray-900">
+              3. Bagaimana cara mendapatkan sertifikat?
+            </h3>
+            <p class="font-mont text-sm sm:text-base text-gray-700 mt-2">
+              Sertifikat akan diberikan apabila kamu menyelesaikan seluruh materi,
+              mengerjakan kuis atau tugas akhir, dan lulus dari evaluasi yang ditentukan.
+            </p>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="bg-white rounded-2xl border border-borderlight p-4 sm:p-5">
+            <h3 class="font-lexend text-lg sm:text-xl text-gray-900">
+              4. Saya tidak bisa login / lupa password, harus bagaimana?
+            </h3>
+            <p class="font-mont text-sm sm:text-base text-gray-700 mt-2">
+              Kamu bisa menggunakan fitur <span class="font-semibold">"Lupa Password"</span> di halaman login.
+              Jika masih terkendala setelah reset password, hubungi kami melalui form kontak di atas
+              dengan kategori <span class="font-semibold">"Kendala Akun / Login"</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIM SUPPORT -->
+    <section class="bg-white py-12">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <h2 class="font-lexend text-3xl sm:text-4xl text-center mb-8 text-gray-900">
+          Tim Support
+        </h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="bg-softgreen rounded-3xl border border-primary p-6 flex flex-col items-center text-center">
+            <img src="https://placehold.co/160x160"
+                 alt="Support 1"
+                 class="w-24 h-24 rounded-full border border-primary object-cover mb-4">
+            <h3 class="font-lexend text-xl text-primary font-semibold mb-1">
+              Farrel
+            </h3>
+            <p class="font-mont text-sm text-gray-800 mb-2">
+              Lead Admin & Technical Support
+            </p>
+            <p class="font-mont text-xs text-muted">
+              Fokus pada pengelolaan platform, integrasi sistem, dan troubleshooting teknis.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-softgreen rounded-3xl border border-primary p-6 flex flex-col items-center text-center">
+            <img src="https://placehold.co/160x160"
+                 alt="Support 2"
+                 class="w-24 h-24 rounded-full border border-primary object-cover mb-4">
+            <h3 class="font-lexend text-xl text-primary font-semibold mb-1">
+              Admin CS
+            </h3>
+            <p class="font-mont text-sm text-gray-800 mb-2">
+              Customer Support & Verifikasi
+            </p>
+            <p class="font-mont text-xs text-muted">
+              Membantu menjawab pertanyaan, memverifikasi akun, dan mengarahkan user ke jalur belajar yang tepat.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-softgreen rounded-3xl border border-primary p-6 flex flex-col items-center text-center">
+            <img src="https://placehold.co/160x160"
+                 alt="Support 3"
+                 class="w-24 h-24 rounded-full border border-primary object-cover mb-4">
+            <h3 class="font-lexend text-xl text-primary font-semibold mb-1">
+              Tim Mentor
+            </h3>
+            <p class="font-mont text-sm text-gray-800 mb-2">
+              Mentor & Kurator Materi
+            </p>
+            <p class="font-mont text-xs text-muted">
+              Menyusun kurikulum, mengevaluasi tugas, dan membimbing member di jalur Attack, Defence, Fundamental, dan CTF.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary mt-auto">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6">
+        <p class="text-center text-white font-mont text-sm md:text-base">
+          © 2025 KSM Cyber Security — E-Learning Platform.
+        </p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
