@@ -3,23 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>E-Learning Cyber Security</title>
+  <title>Course | E-Learning Cyber Security</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CDN (untuk dev; nanti bisa di-build sendiri untuk production) -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            darkbg: '#000000',
-            darknav: '#1E1E1E',
-            darkcard: '#222A34',
             primary: '#309255',
-            muted: '#909090',
             borderlight: '#D9D9D9',
             softgreen: '#EEFBF3',
           },
@@ -40,17 +36,17 @@
 </head>
 <body class="bg-white text-gray-800">
 
-  <!-- Wrapper -->
   <div class="min-h-screen flex flex-col">
 
     <!-- NAVBAR -->
     <header class="bg-softgreen/60">
       <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
         <div class="flex items-center justify-between gap-6">
+
           <!-- Logo + Brand -->
           <div class="flex items-center gap-4">
             <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
-              <img src="image\LogoHeader.png" alt="Logo" class="w-14 h-14 object-cover rounded-xl">
+              <img src="image/LogoHeader.png" alt="Logo" class="w-14 h-14 object-cover rounded-xl">
             </div>
             <div class="font-lexend leading-tight">
               <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
@@ -58,18 +54,47 @@
             </div>
           </div>
 
-          <!-- Menu -->
-          <nav class="hidden md:flex items-center gap-10 font-mont text-xl">
-            <a href="#" class="text-black">Home</a>
-            <a href="#course" class="text-black">Course</a>
-            <a href="#blog" class="text-black">Blog</a>
-            <a href="#contact" class="text-black">Contact</a>
+          <!-- Menu: COURSE aktif -->
+          <nav class="hidden md:flex items-center gap-4 font-mont text-xl">
+            <!-- Home (normal) -->
+            <a href="index.html"
+              class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black 
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Home
+            </a>
+            <!-- Course: aktif di halaman ini (pill hijau) -->
+            <a href="course.html"
+              class="px-4 py-2 rounded-xl transition-all duration-200
+                      bg-primary text-white font-semibold
+                      hover:bg-white hover:text-primary hover:border hover:border-primary">
+              Course
+            </a>
+            <!-- Blog -->
+            <a href="index.html#blog"
+              class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Blog
+            </a>
+            <!-- Contact -->
+            <a href="index.html#contact"
+              class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Contact
+            </a>
           </nav>
+
 
           <!-- Login Button -->
           <div class="flex items-center">
             <a href="login.html"
-               class="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-primary text-white font-mont text-xl font-bold shadow-md">
+              class="inline-flex items-center justify-center 
+                      px-6 py-3 rounded-2xl bg-primary text-white 
+                      font-mont text-xl font-bold shadow-md
+                      transition-all duration-200
+                      hover:bg-white hover:text-primary hover:border hover:border-primary">
               LOGIN
             </a>
           </div>
@@ -77,26 +102,18 @@
       </div>
     </header>
 
-    <!-- HERO SECTION -->
+    <!-- HERO (mirip homebase, tapi konteks Course) -->
     <section class="relative bg-softgreen/60 pt-10 pb-16">
       <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center gap-10">
         <!-- Left text -->
         <div class="flex-1 space-y-8">
           <h1 class="font-lexend text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-snug">
-            <span class="text-primary font-medium">Mulai sekarang</span><br/>
-            <span class="text-black font-medium">belajar dimanapun<br/>kapanpun</span><br/>
-            <span class="text-primary font-medium">untuk masa depan</span>
+            <span class="text-primary font-medium">My Course</span><br/>
+            <span class="text-black font-medium">Bantu Pantau Progres Belajar</span>
           </h1>
 
-          <div>
-            <a href="#course"
-               class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-primary text-white font-mont text-2xl font-bold shadow-md">
-              MULAI
-            </a>
-          </div>
-
-          <!-- Educate Protect Inovate: di bawah tombol, rectangle putih -->
-          <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-white shadow-md mt-4">
+          <!-- Educate Protect Inovate (versi homebase, rectangle putih) -->
+          <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-white shadow-md">
             <p class="font-lexend text-xl md:text-2xl">
               <span class="text-black font-medium">Educate, </span>
               <span class="text-primary font-medium">Protect,</span>
@@ -105,52 +122,91 @@
           </div>
         </div>
 
-        <!-- Right image -->
+        <!-- Right image (ukuran sama homebase) -->
         <div class="flex-1 flex justify-center">
-          <img src="image\P.Header.png"
-               alt="Ilustrasi belajar cyber security"
+          <img src="image/Course.P.Header.Course.png"
+               alt="Ilustrasi course cyber security"
                class="object-cover">
         </div>
       </div>
     </section>
 
-    <!-- CATEGORY STRIP -->
-    <section id="course" class="bg-white py-10">
+    <!-- FILTER + PROGRES + SEARCH (strip hijau muda) -->
+    <section class="bg-white py-8">
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-wrap gap-4 justify-between">
-          <div class="flex-1 min-w-[140px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">CTF</span>
-            </div>
-          </div>
-          <div class="flex-1 min-w-[160px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">Reverse Eng.</span>
-            </div>
-          </div>
-          <div class="flex-1 min-w-[140px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">Network</span>
-            </div>
-          </div>
-          <div class="flex-1 min-w-[140px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">Defence</span>
-            </div>
-          </div>
-        </div>
+        <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-wrap gap-4 items-center">
 
-        <!-- BUTTON LAINNYA DIPINDAH KE BAWAH CARD (hapus dari sini) -->
+          <!-- BUTTON FILTER (ganti All Course) -->
+          <div class="relative">
+            <button id="filterToggle"
+                    class="px-8 py-3 rounded-2xl border border-primary bg-white text-gray-800 font-mont text-2xl
+                           hover:bg-primary hover:text-white transition flex items-center gap-2">
+              <span id="filterLabel">Filter</span>
+              <span class="text-lg">▾</span>
+            </button>
+
+            <!-- Dropdown kategori -->
+            <div id="filterDropdown"
+                 class="hidden absolute left-0 mt-2 w-56 bg-white border border-borderlight rounded-xl shadow-lg z-20">
+              <button data-category="all"
+                      class="w-full text-left px-4 py-2 text-lg hover:bg-softgreen">
+                Semua Kategori
+              </button>
+              <button data-category="fundamental"
+                      class="w-full text-left px-4 py-2 text-lg hover:bg-softgreen">
+                Fundamental
+              </button>
+              <button data-category="attack"
+                      class="w-full text-left px-4 py-2 text-lg hover:bg-softgreen">
+                Attack
+              </button>
+              <button data-category="defend"
+                      class="w-full text-left px-4 py-2 text-lg hover:bg-softgreen">
+                Defend
+              </button>
+              <button data-category="ctf"
+                      class="w-full text-left px-4 py-2 text-lg hover:bg-softgreen">
+                CTF
+              </button>
+            </div>
+          </div>
+
+          <!-- BUTTON PROGRES (tetap ada) -->
+          <button
+            class="px-8 py-3 rounded-2xl border border-primary bg-white text-gray-800 font-mont text-2xl
+                   hover:bg-primary hover:text-white transition">
+            Progres
+          </button>
+
+          <!-- SEARCH + ICON -->
+          <div class="flex-1 min-w-[220px]">
+            <div class="group flex items-center gap-3 h-20 bg-white border border-borderlight rounded-2xl px-4
+                        hover:bg-primary hover:border-primary hover:shadow-md transition">
+              <!-- Icon Search -->
+              <img src="image/Icon.Search.png"
+                   alt="Search"
+                   class="w-7 h-7 opacity-70 group-hover:invert" />
+              <input id="searchInput"
+                     type="text"
+                     placeholder="Search"
+                     class="w-full bg-transparent outline-none text-2xl text-gray-800
+                            group-hover:text-white placeholder-gray-500" />
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- COURSE CARDS -->
+    <!-- COURSE CARDS (TETAP 3, TIDAK DIUBAH) -->
     <section class="bg-white py-10">
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="grid md:grid-cols-3 gap-8">
-          <!-- Card 1 -->
-          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
-            <img src="image\P.1.Sec2.png"
+
+          <!-- Card 1: Basic Linux (Fundamental) -->
+          <article data-course-card data-category="fundamental" data-title="Basic Linux"
+                   class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full bg-white">
+            <img src="image/P.1.Sec2.png"
                  alt="Basic Linux"
                  class="w-full h-48 object-cover rounded-2xl mb-4">
             <h3 class="font-mont text-2xl font-semibold mb-2">Basic Linux</h3>
@@ -158,15 +214,19 @@
               Tutorial memahami cara kerja Linux dan command line dasar dari Linux.
             </p>
             <div class="mt-auto">
-              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+              <button 
+                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                      transition-all duration-200
+                      hover:bg-white hover:text-primary hover:border hover:border-primary">
                 Mulai
               </button>
             </div>
           </article>
 
-          <!-- Card 2 -->
-          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
-            <img src="image\P.2.Sec2.png"
+          <!-- Card 2: Basic System Operation (Fundamental) -->
+          <article data-course-card data-category="fundamental" data-title="Basic System Operation"
+                   class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full bg-white">
+            <img src="image/P.2.Sec2.png"
                  alt="Basic System Operation"
                  class="w-full h-48 object-cover rounded-2xl mb-4">
             <h3 class="font-mont text-2xl font-semibold mb-2">Basic System Operation</h3>
@@ -174,15 +234,19 @@
               Tutorial memahami cara kerja Sistem Operasi dan berbagai jenis SO yang ada.
             </p>
             <div class="mt-auto">
-              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+              <button 
+                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                      transition-all duration-200
+                      hover:bg-white hover:text-primary hover:border hover:border-primary">
                 Mulai
               </button>
             </div>
           </article>
 
-          <!-- Card 3 -->
-          <article class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full">
-            <img src="image\P.3.Sec2.png"
+          <!-- Card 3: Membuat Sertifikat SSL (Defend) -->
+          <article data-course-card data-category="defend" data-title="Membuat Sertifikat SSL"
+                   class="border-2 border-zinc-300 rounded-2xl p-4 flex flex-col h-full bg-white">
+            <img src="image/P.3.Sec2.png"
                  alt="Membuat Sertifikat SSL"
                  class="w-full h-48 object-cover rounded-2xl mb-4">
             <h3 class="font-mont text-2xl font-semibold mb-2">Membuat Sertifikat SSL</h3>
@@ -190,124 +254,15 @@
               Tutorial memahami cara membuat Sertifikat SSL untuk website.
             </p>
             <div class="mt-auto">
-              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl">
+              <button 
+                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                      transition-all duration-200
+                      hover:bg-white hover:text-primary hover:border hover:border-primary">
                 Mulai
               </button>
             </div>
           </article>
-        </div>
 
-        <!-- BUTTON LAINNYA SEKARANG DI BAWAH CARD -->
-        <div class="flex justify-center mt-10">
-          <button
-            class="px-10 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-2xl text-center">
-            Lainnya
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW TO USE E-LEARNING -->
-    <section class="bg-softgreen/60 py-14" id="blog">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="bg-softgreen rounded-3xl px-4 sm:px-8 lg:px-12 py-10">
-          <h2 class="font-lexend text-3xl sm:text-4xl text-center mb-2">
-            <span class="text-primary font-medium">Cara Menggunakan E-Learning </span>
-            <span class="text-gray-800 font-bold">KSM Cyber Security</span>
-          </h2>
-
-          <div class="mt-10 grid md:grid-cols-3 gap-8">
-            <!-- Step 1 -->
-            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
-              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
-                <img src="image\P.1.Sec3.png" alt="Tonton" class="w-16 h-16">
-              </div>
-              <h3 class="font-mont text-2xl mb-2">Tonton Vidionya</h3>
-              <p class="font-mont text-lg font-light">
-                Belajar Cyber Security melalui video yang telah tersedia.
-              </p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
-              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
-                <img src="image\P.2.Sec3.png" alt="Kerjakan Soalnya" class="w-16 h-16">
-              </div>
-              <h3 class="font-mont text-2xl mb-2">Kerjakan Soalnya</h3>
-              <p class="font-mont text-lg font-light">
-                Kerjakan soal yang tersedia untuk menyelesaikan materi.
-              </p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="bg-softgreen rounded-2xl p-6 flex flex-col items-start">
-              <div class="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-4">
-                <img src="image\P.3.Sec3.png" alt="Sertifikat" class="w-16 h-16">
-              </div>
-              <h3 class="font-mont text-2xl mb-2">Dapatkan Sertifikat</h3>
-              <p class="font-mont text-lg font-light">
-                Dapatkan sertifikat setelah menyelesaikan seluruh langkah dan evaluasi.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ALUMNI SPREAD -->
-    <section class="bg-white py-14">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="bg-softgreen rounded-3xl border border-primary px-6 sm:px-10 lg:px-14 py-8 flex flex-col lg:flex-row items-center gap-6">
-          <div class="font-lexend text-3xl sm:text-4xl">
-            <span class="text-black font-normal">Pesebaran</span><br/>
-            <span class="text-primary font-medium">Alumni</span>
-          </div>
-          <div class="flex-1 flex flex-wrap justify-center gap-6">
-            <img src="image\P.1.Sec4.png" alt="Logo perusahaan 1" class="h-16 object-contain">
-            <img src="image\P.2.Sec4.png" alt="Logo perusahaan 2" class="h-16 object-contain">
-            <img src="image\P.3.Sec4.png" alt="Logo perusahaan 3" class="h-16 object-contain">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONI ALUMNI -->
-    <section class="bg-white pb-16" id="contact">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="flex flex-col lg:flex-row gap-10 items-start">
-          <!-- Title -->
-          <div class="flex-1">
-            <h2 class="font-lexend text-4xl sm:text-5xl md:text-6xl leading-tight mb-4">
-              <span class="text-black font-medium">Apa Kata<br/></span>
-              <span class="text-primary font-bold">Alumni</span>
-            </h2>
-          </div>
-
-          <!-- Card -->
-          <div class="flex-[1.5]">
-            <div class="bg-softgreen rounded-3xl border border-primary px-6 sm:px-10 py-8 flex flex-col lg:flex-row gap-8 items-center">
-              <div class="flex flex-col items-center lg:items-start">
-                <img src="image\P.1.Sec5.png"
-                     alt="Akmal Ilmi"
-                     class="w-40 h-40 rounded-xl border border-primary object-cover mb-4">
-                <div class="text-center lg:text-left">
-                  <div class="font-lexend text-primary text-3xl font-bold leading-tight">
-                    Akmal Ilmi
-                  </div>
-                  <div class="font-lexend text-stone-900 text-2xl">
-                    Penetration Tester
-                  </div>
-                </div>
-              </div>
-
-              <p class="font-mont text-lg leading-relaxed text-black text-justify">
-                KSM Cyber Security membantu saya untuk membangun jaringan dalam dunia pekerjaan.
-                Saat ini dunia cyber security memiliki peranan penting dalam membangun dunia
-                internet yang aman. Oleh karena itu, cyber security bakal menjadi incaran
-                dalam dunia pekerjaan.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -322,6 +277,56 @@
     </footer>
 
   </div>
+
+  <!-- SCRIPT FILTER & SEARCH (tidak mengubah tampilan card) -->
+  <script>
+    const cards = document.querySelectorAll("[data-course-card]");
+    const filterToggle = document.getElementById("filterToggle");
+    const filterDropdown = document.getElementById("filterDropdown");
+    const filterLabel = document.getElementById("filterLabel");
+    const searchInput = document.getElementById("searchInput");
+
+    let activeCategory = "all";
+    let searchTerm = "";
+
+    function applyFilters() {
+      cards.forEach(card => {
+        const category = card.dataset.category;
+        const title = card.dataset.title.toLowerCase();
+        const visible =
+          (activeCategory === "all" || category === activeCategory) &&
+          (title.includes(searchTerm));
+
+        card.classList.toggle("hidden", !visible);
+      });
+    }
+
+    filterToggle.addEventListener("click", () => {
+      filterDropdown.classList.toggle("hidden");
+    });
+
+    filterDropdown.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeCategory = btn.dataset.category;
+        filterLabel.textContent = btn.textContent.trim();
+        filterDropdown.classList.add("hidden");
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener("input", () => {
+      searchTerm = searchInput.value.toLowerCase();
+      applyFilters();
+    });
+
+    // Klik di luar dropdown → tutup
+    document.addEventListener("click", (e) => {
+      if (!filterToggle.contains(e.target) && !filterDropdown.contains(e.target)) {
+        filterDropdown.classList.add("hidden");
+      }
+    });
+  </script>
+
 </body>
 </html>
 
