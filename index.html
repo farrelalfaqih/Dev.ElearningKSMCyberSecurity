@@ -58,12 +58,35 @@
             </div>
           </div>
 
-          <!-- Menu -->
-          <nav class="hidden md:flex items-center gap-10 font-mont text-xl">
-            <a href="#" class="text-black">Home</a>
-            <a href="#course" class="text-black">Course</a>
-            <a href="#blog" class="text-black">Blog</a>
-            <a href="#contact" class="text-black">Contact</a>
+          <!-- Menu with rounded pills -->
+          <nav class="hidden md:flex items-center gap-4 font-mont text-xl">
+            <!-- Home: aktif di halaman ini (pill hijau) -->
+            <a href="index.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      bg-primary text-white font-semibold">
+              Home
+            </a>
+
+            <a href="course.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Course
+            </a>
+
+            <a href="#blog"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Blog
+            </a>
+
+            <a href="#contact"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black
+                      hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Contact
+            </a>
           </nav>
 
           <!-- Login Button -->
@@ -114,33 +137,51 @@
       </div>
     </section>
 
-    <!-- CATEGORY STRIP -->
+    <!-- CATEGORY STRIP (Fundamental / Attack / Defence / CTF) -->
     <section id="course" class="bg-white py-10">
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-wrap gap-4 justify-between">
-          <div class="flex-1 min-w-[140px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">CTF</span>
-            </div>
-          </div>
-          <div class="flex-1 min-w-[160px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">Reverse Eng.</span>
-            </div>
-          </div>
-          <div class="flex-1 min-w-[140px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">Network</span>
-            </div>
-          </div>
-          <div class="flex-1 min-w-[140px]">
-            <div class="w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center">
-              <span class="font-mont text-gray-800 text-2xl">Defence</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- BUTTON LAINNYA DIPINDAH KE BAWAH CARD (hapus dari sini) -->
+          <!-- Fundamental -->
+          <a href="course.html" class="flex-1 min-w-[140px]">
+            <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
+                        transition-all duration-200 hover:bg-primary hover:border-primary">
+              <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
+                Fundamental
+              </span>
+            </div>
+          </a>
+
+          <!-- Attack -->
+          <a href="course.html" class="flex-1 min-w-[140px]">
+            <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
+                        transition-all duration-200 hover:bg-primary hover:border-primary">
+              <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
+                Attack
+              </span>
+            </div>
+          </a>
+
+          <!-- Defence -->
+          <a href="course.html" class="flex-1 min-w-[140px]">
+            <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
+                        transition-all duration-200 hover:bg-primary hover:border-primary">
+              <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
+                Defence
+              </span>
+            </div>
+          </a>
+
+          <!-- CTF -->
+          <a href="course.html" class="flex-1 min-w-[140px]">
+            <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
+                        transition-all duration-200 hover:bg-primary hover:border-primary">
+              <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
+                CTF
+              </span>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -197,12 +238,13 @@
           </article>
         </div>
 
-        <!-- BUTTON LAINNYA SEKARANG DI BAWAH CARD -->
+        <!-- BUTTON "Lainnya" → di bawah card -->
         <div class="flex justify-center mt-10">
-          <button
-            class="px-10 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-2xl text-center">
+          <a href="course.html"
+             class="px-10 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-2xl text-center
+                    transition-all duration-200 hover:bg-primary hover:text-white">
             Lainnya
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -324,3 +366,4 @@
   </div>
 </body>
 </html>
+
