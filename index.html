@@ -58,28 +58,31 @@
             </div>
           </div>
 
-          <!-- Menu with rounded pills -->
+          <!-- NAVIGATION -->
           <nav class="hidden md:flex items-center gap-4 font-mont text-xl">
-            <!-- Home: aktif di halaman ini (pill hijau) -->
+            <!-- Home aktif (pill hijau) -->
             <a href="index.html"
-              class="px-4 py-2 rounded-xl transition-all duration-200
+               class="px-4 py-2 rounded-xl transition-all duration-200
                       bg-primary text-white font-semibold
                       hover:bg-white hover:text-primary hover:border hover:border-primary">
               Home
             </a>
+
             <a href="course.html"
                class="px-4 py-2 rounded-xl transition-all duration-200
                       text-black
                       hover:bg-softgreen hover:text-primary hover:font-semibold">
               Course
             </a>
+
             <a href="#blog"
                class="px-4 py-2 rounded-xl transition-all duration-200
                       text-black
                       hover:bg-softgreen hover:text-primary hover:font-semibold">
               Blog
             </a>
-            <a href="contact.html"
+
+            <a href="#contact.html"
                class="px-4 py-2 rounded-xl transition-all duration-200
                       text-black
                       hover:bg-softgreen hover:text-primary hover:font-semibold">
@@ -87,12 +90,12 @@
             </a>
           </nav>
 
-          <!-- Login Button -->
-          <div class="flex items-center">
+          <!-- LOGIN / PROFILE (diisi JS, tapi ada fallback LOGIN) -->
+          <div id="auth-btn-container" class="flex items-center">
+            <!-- Fallback kalau JS belum jalan -->
             <a href="login.html"
-              class="inline-flex items-center justify-center 
-                      px-6 py-3 rounded-2xl bg-primary text-white 
-                      font-mont text-xl font-bold shadow-md
+               class="inline-flex items-center justify-center px-6 py-3 rounded-2xl 
+                      bg-primary text-white font-mont text-xl font-bold shadow-md
                       transition-all duration-200
                       hover:bg-white hover:text-primary hover:border hover:border-primary">
               LOGIN
@@ -114,12 +117,9 @@
           </h1>
 
           <div>
-            <a href="course.html" 
-              class="inline-flex items-center justify-center 
-                      px-8 py-4 rounded-2xl bg-primary text-white 
-                      font-mont text-2xl font-bold shadow-md
-                      transition-all duration-200
-                      hover:bg-white hover:text-primary hover:border hover:border-primary">
+            <a href="course.html"
+               class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-primary text-white font-mont text-2xl font-bold shadow-md
+                      transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
               MULAI
             </a>
           </div>
@@ -149,7 +149,7 @@
         <div class="rounded-3xl bg-softgreen px-4 sm:px-6 lg:px-10 py-6 flex flex-wrap gap-4 justify-between">
 
           <!-- Fundamental -->
-          <a href="course.html" class="flex-1 min-w-[140px]">
+          <a href="course.html?category=fundamental" class="flex-1 min-w-[140px]">
             <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
                         transition-all duration-200 hover:bg-primary hover:border-primary">
               <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
@@ -159,7 +159,7 @@
           </a>
 
           <!-- Attack -->
-          <a href="course.html" class="flex-1 min-w-[140px]">
+          <a href="course.html?category=attack" class="flex-1 min-w-[140px]">
             <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
                         transition-all duration-200 hover:bg-primary hover:border-primary">
               <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
@@ -169,7 +169,7 @@
           </a>
 
           <!-- Defence -->
-          <a href="course.html" class="flex-1 min-w-[140px]">
+          <a href="course.html?category=defence" class="flex-1 min-w-[140px]">
             <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
                         transition-all duration-200 hover:bg-primary hover:border-primary">
               <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
@@ -179,7 +179,7 @@
           </a>
 
           <!-- CTF -->
-          <a href="course.html" class="flex-1 min-w-[140px]">
+          <a href="course.html?category=ctf" class="flex-1 min-w-[140px]">
             <div class="group w-full h-20 bg-white border border-borderlight rounded-2xl flex items-center justify-center
                         transition-all duration-200 hover:bg-primary hover:border-primary">
               <span class="font-mont text-2xl text-gray-800 group-hover:text-white">
@@ -191,7 +191,7 @@
       </div>
     </section>
 
-    <!-- COURSE CARDS -->
+    <!-- COURSE CARDS (preview) -->
     <section class="bg-white py-10">
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="grid md:grid-cols-3 gap-8">
@@ -205,10 +205,8 @@
               Tutorial memahami cara kerja Linux dan command line dasar dari Linux.
             </p>
             <div class="mt-auto">
-              <button 
-                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
-                      transition-all duration-200
-                      hover:bg-white hover:text-primary hover:border hover:border-primary">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                             transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
                 Mulai
               </button>
             </div>
@@ -224,10 +222,8 @@
               Tutorial memahami cara kerja Sistem Operasi dan berbagai jenis SO yang ada.
             </p>
             <div class="mt-auto">
-              <button 
-                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
-                      transition-all duration-200
-                      hover:bg-white hover:text-primary hover:border hover:border-primary">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                             transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
                 Mulai
               </button>
             </div>
@@ -243,17 +239,15 @@
               Tutorial memahami cara membuat Sertifikat SSL untuk website.
             </p>
             <div class="mt-auto">
-              <button 
-                class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
-                      transition-all duration-200
-                      hover:bg-white hover:text-primary hover:border hover:border-primary">
+              <button class="px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                             transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
                 Mulai
               </button>
             </div>
           </article>
         </div>
 
-        <!-- BUTTON "Lainnya" → di bawah card -->
+        <!-- BUTTON "Lainnya" di bawah card -->
         <div class="flex justify-center mt-10">
           <a href="course.html"
              class="px-10 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-2xl text-center
@@ -379,8 +373,67 @@
     </footer>
 
   </div>
+
+  <!-- SUPABASE AUTH BUTTON: GANTI LOGIN → PROFILE JIKA SUDAH LOGIN -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    async function renderAuthButton() {
+      const container = document.getElementById("auth-btn-container");
+      if (!container) return;
+
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error("Error getSession:", error);
+        return;
+      }
+
+      const session = data?.session;
+      if (!session) {
+        // Belum login → tampilkan LOGIN
+        container.innerHTML = `
+          <a href="login.html"
+             class="inline-flex items-center justify-center px-6 py-3 rounded-2xl 
+                    bg-primary text-white font-mont text-xl font-bold shadow-md
+                    transition-all duration-200
+                    hover:bg-white hover:text-primary hover:border hover:border-primary">
+            LOGIN
+          </a>
+        `;
+        return;
+      }
+
+      // Sudah login → tampilkan avatar + Profile
+      const user = session.user;
+      const avatar =
+        user.user_metadata?.avatar_url ||
+        "https://ui-avatars.com/api/?name=" +
+        encodeURIComponent(user.email || "User") +
+        "&background=309255&color=fff";
+
+      container.innerHTML = `
+        <a href="profile.html" class="flex items-center gap-3 px-4 py-2 rounded-xl
+                                     transition-all duration-200
+                                     hover:bg-softgreen">
+          <img src="${avatar}" alt="Avatar" 
+               class="w-10 h-10 rounded-full border border-primary object-cover">
+          <span class="font-mont text-xl text-black font-semibold">Profile</span>
+        </a>
+      `;
+    }
+
+    renderAuthButton();
+  </script>
+
 </body>
 </html>
+
 
 
 
