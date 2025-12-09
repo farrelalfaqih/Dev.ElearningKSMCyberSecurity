@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -17,12 +17,11 @@
           colors: {
             primary: '#309255',
             borderlight: '#D9D9D9',
-            muted: '#909090',
             softgreen: '#EEFBF3',
           },
           fontFamily: {
-            lexend: ['Lexend', 'system-ui', 'sans-serif'],
-            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+            lexend: ['Lexend'],
+            mont: ['Montserrat'],
           }
         }
       }
@@ -30,180 +29,195 @@
   </script>
 
   <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-    }
+    body { font-family: 'Montserrat', sans-serif; }
   </style>
 </head>
+<body class="bg-softgreen/60 min-h-screen flex flex-col">
 
-<body class="min-h-screen bg-softgreen/60 flex items-center justify-center">
+<!-- NAVBAR -->
+<header class="bg-softgreen/60 border-b border-borderlight">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+    <div class="flex items-center justify-between">
 
-  <main class="w-full max-w-md px-6">
-
-    <!-- Header -->
-    <div class="mb-6 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
-          <img src="image/LogoHeader.png" class="w-10 h-10 object-cover rounded-xl">
+      <!-- Logo -->
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl border border-borderlight bg-white flex items-center justify-center">
+          <img src="image/LogoHeader.png" class="w-11 h-11 rounded-xl" alt="Logo">
         </div>
         <div class="font-lexend leading-tight">
-          <div class="text-gray-800 text-xl font-bold">Cyber</div>
-          <div class="text-primary text-xl font-medium">Security</div>
+          <div class="text-gray-800 text-2xl font-bold">Cyber</div>
+          <div class="text-primary text-2xl font-medium">Security</div>
         </div>
       </div>
 
-      <a href="index.html" class="text-sm text-muted hover:text-primary">
-        ← Kembali
-      </a>
+      <!-- Back to Home -->
+      <nav class="hidden md:flex items-center gap-4 font-mont text-base">
+        <a href="index.html" class="px-4 py-2 rounded-xl hover:bg-softgreen hover:text-primary">
+          Home
+        </a>
+      </nav>
+
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="flex-1 flex items-center justify-center px-4 py-12">
+
+  <section class="w-full max-w-lg bg-white border border-borderlight rounded-3xl shadow-lg p-8">
+
+    <h1 class="font-lexend text-3xl font-bold mb-2 text-gray-900">Masuk ke Akun</h1>
+    <p class="text-gray-500 text-sm mb-6">Akses materi & sertifikat E-Learning Cyber Security.</p>
+
+    <!-- FORM LOGIN -->
+    <form id="login-form" class="space-y-5">
+
+      <!-- Email -->
+      <div>
+        <label class="text-sm font-medium text-gray-700" for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          class="w-full mt-1 px-4 py-2.5 rounded-xl border border-borderlight focus:ring-2 focus:ring-primary focus:outline-none"
+          placeholder="email@example.com"
+        />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <div class="flex justify-between items-center">
+          <label class="text-sm font-medium text-gray-700" for="password">Password</label>
+          <a href="forgot-password.html" class="text-xs text-primary font-semibold hover:underline">
+            Lupa password?
+          </a>
+        </div>
+
+        <input
+          id="password"
+          type="password"
+          name="password"
+          required
+          class="w-full mt-1 px-4 py-2.5 rounded-xl border border-borderlight focus:ring-2 focus:ring-primary focus:outline-none"
+          placeholder="Masukkan password"
+        />
+      </div>
+
+      <!-- Error -->
+      <p id="error-text" class="text-sm text-red-600 hidden"></p>
+
+      <!-- BUTTON -->
+      <button
+        id="login-button"
+        type="submit"
+        class="w-full bg-primary text-white py-3 rounded-xl font-semibold shadow-md 
+               hover:bg-primary/90 transition"
+      >
+        Masuk
+      </button>
+    </form>
+
+    <!-- Pemisah -->
+    <div class="flex items-center gap-3 my-6">
+      <div class="h-px bg-borderlight flex-1"></div>
+      <span class="text-xs text-gray-400 uppercase">atau</span>
+      <div class="h-px bg-borderlight flex-1"></div>
     </div>
 
-    <!-- Login Card -->
-    <section class="bg-white rounded-3xl shadow-xl border border-borderlight px-6 py-8 sm:px-8 sm:py-10">
+    <!-- Sign Up -->
+    <p class="text-center text-sm">
+      Belum punya akun?
+      <a href="sign-up.html" class="text-primary font-semibold hover:underline">Daftar sekarang</a>
+    </p>
 
-      <h1 class="text-center font-lexend text-3xl font-semibold mb-6">
-        Masuk Akun
-      </h1>
+  </section>
+</main>
 
-      <!-- FORM LOGIN -->
-      <form id="login-form" class="space-y-5">
+<!-- FOOTER -->
+<footer class="bg-primary">
+  <div class="max-w-7xl mx-auto px-4 py-4">
+    <p class="text-center text-white text-sm">
+      © 2025 KSM Cyber Security — E-Learning Platform
+    </p>
+  </div>
+</footer>
 
-        <!-- Email -->
-        <div>
-          <label class="block text-sm font-medium text-gray-800 mb-1.5">Email</label>
-          <input
-            type="email"
-            name="email"
-            required
-            class="w-full px-4 py-2.5 rounded-2xl border border-borderlight bg-white text-sm focus:ring-2 focus:ring-primary focus:outline-none"
-            placeholder="nama@ksmcyber.ac.id"
-          />
-        </div>
+<!-- SUPABASE LOGIN SCRIPT -->
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-        <!-- Password -->
-        <div>
-          <label class="block text-sm font-medium text-gray-800 mb-1.5">Password</label>
-          <input
-            type="password"
-            name="password"
-            required
-            class="w-full px-4 py-2.5 rounded-2xl border border-borderlight bg-white text-sm focus:ring-2 focus:ring-primary focus:outline-none"
-            placeholder="Masukkan password"
-          />
-        </div>
+  const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+  const supabaseAnonKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
 
-        <!-- Error + success -->
-        <p id="error-text" class="text-sm text-red-600 font-mont hidden"></p>
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-        <!-- Tombol -->
-        <button
-          id="login-button"
-          type="submit"
-          class="w-full px-4 py-3 rounded-2xl bg-primary text-white shadow-md font-semibold">
-          Masuk
-        </button>
-      </form>
+  const form = document.getElementById("login-form");
+  const errorText = document.getElementById("error-text");
+  const loginButton = document.getElementById("login-button");
 
-      <!-- Link daftar -->
-      <p class="mt-6 text-center text-sm">
-        Belum punya akun?
-        <a href="sign-up.html" class="text-primary font-semibold hover:underline">Daftar sekarang</a>
-      </p>
-    </section>
-  </main>
-
-  <!-- Script Supabase Login -->
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
-    const supabaseAnonKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
-
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-    const form = document.getElementById("login-form");
-    const btn = document.getElementById("login-button");
-    const err = document.getElementById("error-text");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      err.classList.add("hidden");
-      err.textContent = "";
-
-      const formData = new FormData(form);
-      const email = formData.get("email")?.toString().trim();
-      const password = formData.get("password")?.toString().trim();
-
-      if (!email || !password) {
-        err.textContent = "Email dan password wajib diisi.";
-        err.classList.remove("hidden");
+  // Kalau sudah login, jangan tampilkan halaman login lagi
+  async function checkSession() {
+    try {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) {
+        console.error("Session error:", sessionError.message);
         return;
       }
+      if (sessionData?.session) {
+        window.location.href = "index.html";
+      }
+    } catch (err) {
+      console.error("Unexpected session error:", err);
+    }
+  }
+  checkSession();
 
-      // Loading
-      btn.disabled = true;
-      const oldLabel = btn.textContent;
-      btn.textContent = "Memproses...";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorText.classList.add("hidden");
+    errorText.textContent = "";
 
-      // Login ke Supabase Auth
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+    const formData = new FormData(form);
+    const emailRaw = formData.get("email") ?? "";
+    const passwordRaw = formData.get("password") ?? "";
+
+    const email = emailRaw.toString().trim();
+    const password = passwordRaw.toString();
+
+    if (!email || !password) {
+      errorText.textContent = "Email dan password wajib diisi.";
+      errorText.classList.remove("hidden");
+      return;
+    }
+
+    loginButton.disabled = true;
+    loginButton.textContent = "Memproses...";
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
-        const msg = (error.message || "").toLowerCase();
-        btn.disabled = false;
-        btn.textContent = oldLabel;
-
-        if (msg.includes("confirm") || msg.includes("verified")) {
-          err.textContent =
-            "Email belum terverifikasi. Silakan cek inbox / spam untuk verifikasi.";
-        } else {
-          err.textContent = "Email atau password salah.";
-        }
-
-        err.classList.remove("hidden");
+        errorText.textContent = error.message;
+        errorText.classList.remove("hidden");
+        loginButton.disabled = false;
+        loginButton.textContent = "Masuk";
         return;
       }
 
-      const user = data.user;
-
-      // AMAN: metadata phone + fullname
-      const meta = user.user_metadata || {};
-
-      // Sinkron ke table Db_Pengguna (hanya jika belum ada)
-      const { data: existing, error: selectError } = await supabase
-        .from("Db_Pengguna")
-        .select("id_pengguna")
-        .eq("id_pengguna", user.id)
-        .maybeSingle();
-
-      if (!existing && !selectError) {
-        const insertPayload = {
-          id_pengguna: user.id,
-          email_pengguna: user.email,
-          nama_pengguna: meta.full_name || "",
-          role: "siswa",
-          status_langganan: false,
-          nomor_telepon: meta.phone || "",        // ✔ TIDAK NULL
-          deskripsi_profile: "",
-          instistusi: "",                        // ✔ sesuai nama kolom baru
-        };
-
-        const { error: insertError } = await supabase
-          .from("Db_Pengguna")
-          .insert(insertPayload);
-
-        if (insertError) {
-          console.error("Insert Db_Pengguna gagal:", insertError);
-        }
-      }
-
-      // Redirect ke homebase
-      window.location.href = "homebase.html";
-    });
-  </script>
+      window.location.href = "index.html";
+    } catch (err) {
+      console.error("Unexpected login error:", err);
+      errorText.textContent = "Terjadi kesalahan jaringan. Coba lagi beberapa saat.";
+      errorText.classList.remove("hidden");
+      loginButton.disabled = false;
+      loginButton.textContent = "Masuk";
+    }
+  });
+</script>
 
 </body>
 </html>
+
+
