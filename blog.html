@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog | E-Learning Cyber Security</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            borderlight: '#D9D9D9',
+            softgreen: '#EEFBF3',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  </style>
+</head>
+
+<body class="bg-white text-gray-800">
+
+  <!-- DEV BANNER -->
+  <div class="bg-yellow-50 border-b border-yellow-300">
+    <p class="max-w-7xl mx-auto px-4 lg:px-8 py-2 text-sm md:text-base font-mont text-yellow-900 text-center">
+      ⚠️ Website ini masih dalam tahap <span class="font-semibold">pengembangan</span>. 
+      Beberapa fitur mungkin belum berfungsi sepenuhnya atau masih dalam percobaan.
+    </p>
+  </div>
+
+  <div class="min-h-screen flex flex-col">
+
+    <!-- NAVBAR (sticky, gaya index, BLOG aktif) -->
+    <header class="bg-softgreen/60 sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+        <div class="flex items-center justify-between gap-6">
+
+          <!-- Logo + Brand -->
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+              <img src="image/LogoHeader.png" alt="Logo" class="w-14 h-14 object-cover rounded-xl">
+            </div>
+            <div class="font-lexend leading-tight">
+              <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
+              <div class="text-primary text-3xl md:text-4xl font-medium">Security</div>
+            </div>
+          </div>
+
+          <!-- NAV -->
+          <nav class="hidden md:flex items-center gap-4 font-mont text-xl">
+            <a href="index.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Home
+            </a>
+
+            <a href="course.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Course
+            </a>
+
+            <!-- BLOG ACTIVE -->
+            <a href="blog.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      bg-primary text-white font-semibold
+                      hover:bg-white hover:text-primary hover:border hover:border-primary">
+              Blog
+            </a>
+
+            <a href="contact.html"
+               class="px-4 py-2 rounded-xl transition-all duration-200
+                      text-black hover:bg-softgreen hover:text-primary hover:font-semibold">
+              Contact
+            </a>
+          </nav>
+
+          <!-- LOGIN / PROFILE -->
+          <div id="auth-btn-container" class="flex items-center">
+            <a href="login.html"
+               class="inline-flex items-center justify-center px-6 py-3 rounded-2xl
+                      bg-primary text-white font-mont text-xl font-bold shadow-md
+                      transition-all duration-200
+                      hover:bg-white hover:text-primary hover:border hover:border-primary">
+              LOGIN
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO BLOG -->
+    <section class="bg-softgreen/60 pt-10 pb-16">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+
+        <!-- Left -->
+        <div class="space-y-6">
+          <h1 class="font-lexend leading-tight text-4xl sm:text-5xl lg:text-6xl">
+            <span class="font-bold text-black">Welcome</span><br/>
+            <span class="font-medium text-black">Our </span>
+            <span class="font-bold text-primary">Blog</span>
+          </h1>
+
+          <!-- Educate Protect Inovate (posisi feel mirip index) -->
+          <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-white shadow-md">
+            <p class="font-lexend text-xl md:text-2xl">
+              <span class="text-black font-medium">Educate, </span>
+              <span class="text-primary font-medium">Protect,</span>
+              <span class="text-black font-medium"> Inovate</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Right image -->
+        <div class="flex justify-center lg:justify-end">
+          <!-- ganti src sesuai asetmu -->
+          <img src="image/P.Header.png"
+               alt="Header Blog"
+               class="w-full max-w-[760px] object-cover rounded-3xl shadow-xl">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <main class="bg-white py-12">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+
+        <div class="grid lg:grid-cols-12 gap-10">
+
+          <!-- LEFT SIDEBAR -->
+          <aside class="lg:col-span-4 space-y-10">
+
+            <!-- Search -->
+            <div class="space-y-3">
+              <h2 class="font-lexend text-3xl text-black">Search</h2>
+
+              <div class="h-20 rounded-2xl border-2 border-zinc-300 flex items-center px-5">
+                <input
+                  id="searchInput"
+                  type="text"
+                  placeholder="Cari artikel..."
+                  class="w-full outline-none bg-transparent font-mont text-xl text-zinc-700 placeholder:text-zinc-400"
+                />
+              </div>
+            </div>
+
+            <!-- Kategori -->
+            <div class="space-y-4">
+              <h2 class="font-lexend text-3xl text-black">Kategori Blog</h2>
+
+              <div class="rounded-2xl border-2 border-zinc-300 p-6 space-y-4">
+
+                <!-- button kategori -->
+                <button data-cat="berita"
+                        class="w-full h-16 rounded-2xl border-2 border-zinc-300 font-mont text-xl text-zinc-600
+                               transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary">
+                  Berita
+                </button>
+
+                <button data-cat="tutorial"
+                        class="w-full h-16 rounded-2xl border-2 border-zinc-300 font-mont text-xl text-zinc-600
+                               transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary">
+                  Tutorial
+                </button>
+
+                <button data-cat="tips"
+                        class="w-full h-16 rounded-2xl border-2 border-zinc-300 font-mont text-xl text-zinc-600
+                               transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary">
+                  Tips dan Trik
+                </button>
+
+                <button data-cat="edukasi"
+                        class="w-full h-16 rounded-2xl border-2 border-zinc-300 font-mont text-xl text-zinc-600
+                               transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary">
+                  Edukasi
+                </button>
+
+              </div>
+            </div>
+
+          </aside>
+
+          <!-- RIGHT: RECENT BLOG -->
+          <section class="lg:col-span-8 space-y-6">
+            <h2 class="font-lexend text-3xl text-black">Recent Blog</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+              <!-- Card 1 -->
+              <article data-blog-card data-cat="berita" data-title="Pencegahan Ransomware"
+                       class="rounded-2xl border-2 border-zinc-300 p-4 flex flex-col bg-white">
+                <img src="image/P.1.Sec2.png"
+                     alt="Pencegahan Ransomware"
+                     class="w-full h-56 object-cover rounded-2xl mb-4">
+                <h3 class="font-mont text-2xl font-semibold text-black mb-2">
+                  Pencegahan Ransomware
+                </h3>
+                <p class="font-mont text-lg text-black mb-6">
+                  Ransomware merupakan salah satu ancaman utama dalam dunia cyber
+                </p>
+                <div class="mt-auto">
+                  <a href="#"
+                     class="inline-flex items-center justify-center px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                            transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                    Mulai
+                  </a>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article data-blog-card data-cat="edukasi" data-title="Kesalahan Cyber Security"
+                       class="rounded-2xl border-2 border-zinc-300 p-4 flex flex-col bg-white">
+                <img src="image/P.2.Sec2.png"
+                     alt="Kesalahan Cyber Security"
+                     class="w-full h-56 object-cover rounded-2xl mb-4">
+                <h3 class="font-mont text-2xl font-semibold text-black mb-2">
+                  Kesalahan Cyber Security
+                </h3>
+                <p class="font-mont text-lg text-black mb-6">
+                  Kesalahan kecil dalam keamanan siber dapat menjadi kesalahan besar
+                </p>
+                <div class="mt-auto">
+                  <a href="#"
+                     class="inline-flex items-center justify-center px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                            transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                    Mulai
+                  </a>
+                </div>
+              </article>
+
+              <!-- Card 3 (muncul seperti "bawah kiri" pada export kamu) -->
+              <article data-blog-card data-cat="berita" data-title="Pencegahan Ransomware 2"
+                       class="rounded-2xl border-2 border-zinc-300 p-4 flex flex-col bg-white md:col-span-2">
+                <div class="grid md:grid-cols-2 gap-6 items-start">
+                  <img src="image/P.3.Sec2.png"
+                       alt="Pencegahan Ransomware"
+                       class="w-full h-56 object-cover rounded-2xl">
+                  <div class="flex flex-col h-full">
+                    <h3 class="font-mont text-2xl font-semibold text-black mb-2">
+                      Pencegahan Ransomware
+                    </h3>
+                    <p class="font-mont text-lg text-black mb-6">
+                      Ransomware merupakan salah satu ancaman utama dalam dunia cyber
+                    </p>
+                    <div class="mt-auto">
+                      <a href="#"
+                         class="inline-flex items-center justify-center px-8 py-3 rounded-2xl bg-primary text-white font-lexend text-2xl
+                                transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                        Mulai
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary mt-auto">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6">
+        <p class="text-center text-white font-mont text-sm md:text-base">
+          © 2025 KSM Cyber Security — E-Learning Platform.
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Blog filter + search (simple) -->
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll("[data-blog-card]");
+    const catButtons = document.querySelectorAll("[data-cat]");
+
+    let activeCat = "all";
+    let q = "";
+
+    function applyBlogFilter() {
+      cards.forEach(card => {
+        const cardCat = card.dataset.cat;
+        const title = (card.dataset.title || "").toLowerCase();
+
+        const okCat = (activeCat === "all") || (cardCat === activeCat);
+        const okQ = title.includes(q);
+
+        card.classList.toggle("hidden", !(okCat && okQ));
+      });
+    }
+
+    catButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const next = btn.dataset.cat;
+        activeCat = next;
+
+        // styling aktif (opsional)
+        catButtons.forEach(b => b.classList.remove("bg-primary","text-white","border-primary"));
+        btn.classList.add("bg-primary","text-white","border-primary");
+
+        applyBlogFilter();
+      });
+    });
+
+    searchInput.addEventListener("input", () => {
+      q = searchInput.value.toLowerCase().trim();
+      applyBlogFilter();
+    });
+  </script>
+
+  <!-- SUPABASE: LOGIN -> PROFILE -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    async function renderAuthButton() {
+      const container = document.getElementById("auth-btn-container");
+      if (!container) return;
+
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error("getSession error:", error);
+        return;
+      }
+
+      const session = data?.session;
+
+      if (!session) {
+        container.innerHTML = `
+          <a href="login.html"
+             class="inline-flex items-center justify-center px-6 py-3 rounded-2xl
+                    bg-primary text-white font-mont text-xl font-bold shadow-md
+                    transition-all duration-200
+                    hover:bg-white hover:text-primary hover:border hover:border-primary">
+            LOGIN
+          </a>
+        `;
+        return;
+      }
+
+      const user = session.user;
+      const avatar =
+        user.user_metadata?.avatar_url ||
+        "https://ui-avatars.com/api/?name=" +
+          encodeURIComponent(user.email || "User") +
+          "&background=309255&color=fff";
+
+      container.innerHTML = `
+        <a href="profile.html"
+           class="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white border border-primary shadow-sm
+                  transition-all duration-200 hover:bg-softgreen">
+          <img src="${avatar}" class="w-9 h-9 rounded-full border border-primary object-cover" alt="Avatar">
+          <span class="font-mont text-lg text-black font-semibold">Profile</span>
+        </a>
+      `;
+    }
+
+    renderAuthButton();
+  </script>
+
+</body>
+</html>
