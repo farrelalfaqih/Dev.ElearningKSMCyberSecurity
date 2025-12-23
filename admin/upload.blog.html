@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin | Upload Blog</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            borderlight: '#D9D9D9',
+            softgreen: '#EEFBF3',
+            muted: '#909090',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  </style>
+</head>
+
+<body class="bg-softgreen/60 text-gray-800">
+
+  <!-- Top Bar -->
+  <header class="sticky top-0 z-40 bg-softgreen/80 backdrop-blur border-b border-borderlight">
+    <div class="max-w-6xl mx-auto px-4 lg:px-8 py-4 flex items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl border border-borderlight bg-white flex items-center justify-center">
+          <span class="font-lexend font-extrabold text-primary">A</span>
+        </div>
+        <div class="leading-tight">
+          <div class="font-lexend text-xl font-bold">Admin Panel</div>
+          <div class="text-sm text-gray-600">Upload Blog Post</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html"
+           class="px-4 py-2 rounded-xl border border-borderlight bg-white hover:bg-softgreen transition-all">
+          Home
+        </a>
+
+        <button id="btnLogout"
+                class="px-4 py-2 rounded-xl bg-primary text-white font-semibold shadow-sm
+                       transition-all hover:bg-white hover:text-primary hover:border hover:border-primary">
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 lg:px-8 py-10">
+    <!-- Alert -->
+    <div id="alert" class="hidden mb-6 rounded-2xl border px-4 py-3 text-sm"></div>
+
+    <!-- Card -->
+    <section class="bg-white rounded-3xl border border-borderlight shadow-lg p-6 md:p-10">
+      <div class="mb-8">
+        <h1 class="font-lexend text-3xl md:text-4xl font-bold">
+          Upload <span class="text-primary">Blog</span>
+        </h1>
+        <p class="mt-2 text-gray-600">
+          Upload cover ke <span class="font-semibold">Supabase Storage</span> dan simpan postingan ke database.
+        </p>
+      </div>
+
+      <form id="blogForm" class="grid md:grid-cols-2 gap-6">
+        <!-- Left -->
+        <div class="space-y-5">
+          <div>
+            <label class="block font-semibold mb-2">Judul</label>
+            <input name="title" required
+                   class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                   placeholder="Contoh: Pencegahan Ransomware untuk Pemula" />
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-2">Kategori</label>
+            <select name="category" required
+                    class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+              <option value="Berita">Berita</option>
+              <option value="Tutorial">Tutorial</option>
+              <option value="Tips dan Trik">Tips dan Trik</option>
+              <option value="Edukasi">Edukasi</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-2">Status</label>
+            <select name="status" required
+                    class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+            <p class="text-xs text-gray-500 mt-2">
+              Tips: pakai <b>Draft</b> dulu untuk preview, lalu publish.
+            </p>
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-2">Excerpt (Ringkasan)</label>
+            <textarea name="excerpt" rows="4" required
+                      class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      placeholder="Ringkasan singkat untuk preview kartu blog..."></textarea>
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-2">Cover Image (PNG/JPG)</label>
+            <input id="coverFile" name="cover" type="file" accept="image/*" required
+                   class="w-full px-4 py-3 rounded-2xl border border-borderlight bg-white" />
+            <p class="text-xs text-gray-500 mt-2">
+              File akan diupload ke bucket: <b>blog-covers</b>.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button id="btnSubmit" type="submit"
+                    class="inline-flex items-center justify-center px-6 py-3 rounded-2xl
+                           bg-primary text-white font-mont text-lg font-bold shadow-md
+                           transition-all duration-200
+                           hover:bg-white hover:text-primary hover:border hover:border-primary">
+              Upload & Simpan
+            </button>
+
+            <button id="btnReset" type="button"
+                    class="px-6 py-3 rounded-2xl border border-borderlight bg-white
+                           transition-all hover:bg-softgreen">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="space-y-5">
+          <div>
+            <label class="block font-semibold mb-2">Konten (Markdown / Text)</label>
+            <textarea name="content" rows="18" required
+                      class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      placeholder="Tulis konten blog di sini..."></textarea>
+            <p class="text-xs text-gray-500 mt-2">
+              Kamu bisa pakai Markdown, lalu nanti di halaman blog bisa dirender.
+            </p>
+          </div>
+
+          <!-- Preview Cover -->
+          <div class="rounded-3xl border border-borderlight bg-softgreen p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="font-semibold">Preview Cover</div>
+              <div id="fileInfo" class="text-xs text-gray-500"></div>
+            </div>
+            <div class="bg-white rounded-2xl border border-borderlight p-3">
+              <img id="coverPreview" alt="Preview" class="w-full h-56 object-cover rounded-2xl hidden" />
+              <div id="coverPlaceholder" class="h-56 flex items-center justify-center text-gray-500">
+                Belum ada gambar dipilih
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-yellow-50 border border-yellow-200 p-4 text-sm text-yellow-900">
+            ⚠️ Pastikan bucket <b>blog-covers</b> sudah dibuat di Supabase Storage.<br/>
+            Kalau bucket <b>private</b>, kamu butuh signed URL untuk menampilkan gambar.
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    // === Supabase Config (punya kamu) ===
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // === Settings yang bisa kamu ubah ===
+    const BUCKET_NAME = "blog-covers";
+    const POSTS_TABLE = "blog_posts";
+    const USERS_TABLE = "pengguna";     // tabel user kamu
+    const USER_ID_COL = "auth_user_id"; // kolom relasi ke auth.users.id
+    const ROLE_COL = "role";            // kolom role
+
+    // === Elements ===
+    const alertBox = document.getElementById("alert");
+    const blogForm = document.getElementById("blogForm");
+    const btnSubmit = document.getElementById("btnSubmit");
+    const btnReset = document.getElementById("btnReset");
+    const btnLogout = document.getElementById("btnLogout");
+
+    const coverFile = document.getElementById("coverFile");
+    const coverPreview = document.getElementById("coverPreview");
+    const coverPlaceholder = document.getElementById("coverPlaceholder");
+    const fileInfo = document.getElementById("fileInfo");
+
+    let currentUserId = null;
+
+    function showAlert(type, msg) {
+      alertBox.classList.remove("hidden");
+      const styles = {
+        error:  "border-red-200 bg-red-50 text-red-800",
+        success:"border-green-200 bg-green-50 text-green-800",
+        info:   "border-blue-200 bg-blue-50 text-blue-800",
+      };
+      alertBox.className = `mb-6 rounded-2xl border px-4 py-3 text-sm ${styles[type] || styles.info}`;
+      alertBox.textContent = msg;
+    }
+
+    function setLoading(isLoading) {
+      btnSubmit.disabled = isLoading;
+      btnSubmit.textContent = isLoading ? "MEMPROSES..." : "Upload & Simpan";
+      btnSubmit.classList.toggle("opacity-70", isLoading);
+      btnSubmit.classList.toggle("cursor-not-allowed", isLoading);
+    }
+
+    function slugify(text) {
+      return String(text)
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+    }
+
+    async function requireAdmin() {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) throw error;
+
+      const session = data?.session;
+      if (!session) {
+        window.location.href = "admin-login.html";
+        return;
+      }
+
+      currentUserId = session.user.id;
+
+      // cek role admin di tabel user
+      const { data: u, error: e2 } = await supabase
+        .from(USERS_TABLE)
+        .select(`${ROLE_COL}`)
+        .eq(USER_ID_COL, currentUserId)
+        .maybeSingle();
+
+      if (e2) throw e2;
+
+      const isAdmin = (u?.[ROLE_COL] === "admin");
+      if (!isAdmin) {
+        await supabase.auth.signOut();
+        showAlert("error", "Akun ini bukan Admin. Kamu sudah di-logout.");
+        setTimeout(() => window.location.href = "admin-login.html", 900);
+        return;
+      }
+    }
+
+    // Preview cover image
+    coverFile.addEventListener("change", () => {
+      const file = coverFile.files?.[0];
+      if (!file) {
+        coverPreview.classList.add("hidden");
+        coverPlaceholder.classList.remove("hidden");
+        fileInfo.textContent = "";
+        return;
+      }
+
+      fileInfo.textContent = `${file.name} • ${(file.size / 1024).toFixed(0)} KB`;
+      const url = URL.createObjectURL(file);
+      coverPreview.src = url;
+      coverPreview.classList.remove("hidden");
+      coverPlaceholder.classList.add("hidden");
+    });
+
+    btnReset.addEventListener("click", () => {
+      blogForm.reset();
+      coverPreview.classList.add("hidden");
+      coverPlaceholder.classList.remove("hidden");
+      fileInfo.textContent = "";
+      alertBox.classList.add("hidden");
+    });
+
+    btnLogout.addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      window.location.href = "admin-login.html";
+    });
+
+    blogForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      alertBox.classList.add("hidden");
+      setLoading(true);
+
+      try {
+        const fd = new FormData(blogForm);
+        const title = (fd.get("title") || "").toString().trim();
+        const category = (fd.get("category") || "").toString().trim();
+        const status = (fd.get("status") || "draft").toString().trim();
+        const excerpt = (fd.get("excerpt") || "").toString().trim();
+        const content = (fd.get("content") || "").toString().trim();
+
+        const file = coverFile.files?.[0];
+        if (!file) {
+          showAlert("error", "Cover image wajib diupload.");
+          setLoading(false);
+          return;
+        }
+
+        // Generate slug + path file
+        const baseSlug = slugify(title);
+        const safeName = file.name.replace(/\s+/g, "-");
+        const filePath = `covers/${currentUserId}/${Date.now()}-${safeName}`;
+
+        // 1) Upload cover ke Storage
+        const { error: upErr } = await supabase
+          .storage
+          .from(BUCKET_NAME)
+          .upload(filePath, file, { upsert: false });
+
+        if (upErr) {
+          showAlert("error", `Gagal upload cover: ${upErr.message}`);
+          setLoading(false);
+          return;
+        }
+
+        // 2) Ambil public URL (bucket harus public)
+        const { data: pub } = supabase
+          .storage
+          .from(BUCKET_NAME)
+          .getPublicUrl(filePath);
+
+        const coverUrl = pub?.publicUrl;
+        if (!coverUrl) {
+          showAlert("error", "Cover terupload, tapi public URL tidak terbentuk. Cek apakah bucket public.");
+          setLoading(false);
+          return;
+        }
+
+        // 3) Insert data blog ke DB
+        // NOTE: slug sebaiknya unique. Kalau bentrok, tambahin timestamp.
+        const slug = `${baseSlug}-${Date.now()}`;
+
+        const { error: insErr } = await supabase
+          .from(POSTS_TABLE)
+          .insert([{
+            title,
+            slug,
+            category,
+            excerpt,
+            content,
+            cover_url: coverUrl,
+            author_id: currentUserId,
+            status,
+          }]);
+
+        if (insErr) {
+          showAlert("error", `Gagal simpan postingan: ${insErr.message}`);
+          setLoading(false);
+          return;
+        }
+
+        showAlert("success", "Berhasil! Postingan tersimpan dan cover terupload.");
+        blogForm.reset();
+        coverPreview.classList.add("hidden");
+        coverPlaceholder.classList.remove("hidden");
+        fileInfo.textContent = "";
+        setLoading(false);
+
+      } catch (err) {
+        console.error(err);
+        showAlert("error", "Terjadi error. Cek console & pastikan bucket/tabel/policy Supabase sudah benar.");
+        setLoading(false);
+      }
+    });
+
+    // Init: wajib admin
+    (async () => {
+      try {
+        await requireAdmin();
+      } catch (e) {
+        console.error(e);
+        showAlert("error", "Tidak bisa validasi admin. Cek policy/RLS tabel pengguna.");
+      }
+    })();
+  </script>
+</body>
+</html>
