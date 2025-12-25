@@ -69,6 +69,9 @@
     <h1 class="font-lexend text-3xl font-bold mb-2 text-gray-900">Masuk ke Akun</h1>
     <p class="text-gray-500 text-sm mb-6">Akses materi & sertifikat E-Learning Cyber Security.</p>
 
+    <!-- ALERT BOX (info / success / error) -->
+    <div id="alert" class="hidden mb-5 rounded-2xl border px-4 py-3 text-sm"></div>
+
     <!-- FORM LOGIN -->
     <form id="login-form" class="space-y-5">
 
@@ -94,28 +97,73 @@
           </a>
         </div>
 
-        <input
-          id="password"
-          type="password"
-          name="password"
-          required
-          class="w-full mt-1 px-4 py-2.5 rounded-xl border border-borderlight focus:ring-2 focus:ring-primary focus:outline-none"
-          placeholder="Masukkan password"
-        />
+        <div class="relative mt-1">
+          <input
+            id="password"
+            type="password"
+            name="password"
+            required
+            class="w-full px-4 py-2.5 pr-12 rounded-xl border border-borderlight
+                   focus:ring-2 focus:ring-primary focus:outline-none"
+            placeholder="Masukkan password"
+          />
+
+          <button
+            type="button"
+            onclick="togglePassword('password', this)"
+            class="absolute inset-y-0 right-3 flex items-center"
+            aria-label="Toggle Password"
+          >
+            <img
+              src="image/invisiblepassword.png"
+              alt="Toggle Password"
+              class="w-5 h-5 opacity-80 hover:opacity-100"
+            />
+          </button>
+        </div>
+
+        <!-- ERROR TEXT (legacy) -->
+        <p id="error-text" class="text-sm text-red-600 hidden mt-2"></p>
+
+        <!-- ✅ PANEL VERIFIKASI -->
+        <div id="verify-panel" class="hidden mt-3 rounded-2xl border border-yellow-200 bg-yellow-50 p-4">
+          <p class="text-sm text-yellow-900">
+            ⚠️ Email kamu <span class="font-semibold">belum terverifikasi</span>.
+            Silakan cek inbox Gmail (termasuk Spam/Promotions) untuk verifikasi akun.
+          </p>
+
+          <!-- Tombol center + cooldown text -->
+          <div class="mt-3 flex flex-col items-center justify-center gap-2">
+            <button
+              id="btn-resend"
+              type="button"
+              class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl
+                     bg-white border border-primary text-primary font-semibold
+                     hover:bg-primary hover:text-white transition
+                     disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              Kirim ulang email verifikasi
+            </button>
+
+            <p id="cooldown-text" class="hidden text-xs text-yellow-900">
+              Mohon tunggu <span id="cooldown-timer" class="font-semibold">05:00</span> sebelum kirim ulang.
+            </p>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Error -->
-      <p id="error-text" class="text-sm text-red-600 hidden"></p>
-
-      <!-- BUTTON -->
-      <button
-        id="login-button"
-        type="submit"
-        class="w-full bg-primary text-white py-3 rounded-xl font-semibold shadow-md 
-               hover:bg-primary/90 transition"
-      >
-        Masuk
-      </button>
+      <!-- ✅ JARAK: password -> button masuk (lebih lega) -->
+      <div class="pt-3">
+        <button
+          id="login-button"
+          type="submit"
+          class="w-full bg-primary text-white py-3 rounded-xl font-semibold shadow-md 
+                 hover:bg-primary/90 transition"
+        >
+          Masuk
+        </button>
+      </div>
     </form>
 
     <!-- Pemisah -->
@@ -157,14 +205,136 @@
   const errorText = document.getElementById("error-text");
   const loginButton = document.getElementById("login-button");
 
+  const alertBox = document.getElementById("alert");
+  const verifyPanel = document.getElementById("verify-panel");
+  const btnResend = document.getElementById("btn-resend");
+
+  const cooldownText = document.getElementById("cooldown-text");
+  const cooldownTimer = document.getElementById("cooldown-timer");
+
+  // ===== COOLDOWN CONFIG =====
+  const COOLDOWN_SECONDS = 300; // 5 menit
+  const COOLDOWN_KEY = "resend_verify_cooldown_until"; // localStorage key
+  let cooldownInterval = null;
+
+  function showAlert(type, msg) {
+    alertBox.classList.remove("hidden");
+    const styles = {
+      error:  "border-red-200 bg-red-50 text-red-800",
+      success:"border-green-200 bg-green-50 text-green-800",
+      info:   "border-blue-200 bg-blue-50 text-blue-800",
+    };
+    alertBox.className = `mb-5 rounded-2xl border px-4 py-3 text-sm ${styles[type] || styles.info}`;
+    alertBox.textContent = msg;
+  }
+
+  function hideAlert() {
+    alertBox.classList.add("hidden");
+    alertBox.textContent = "";
+  }
+
+  function setLoading(isLoading) {
+    loginButton.disabled = isLoading;
+    loginButton.textContent = isLoading ? "Memproses..." : "Masuk";
+    loginButton.classList.toggle("opacity-70", isLoading);
+    loginButton.classList.toggle("cursor-not-allowed", isLoading);
+  }
+
+  function formatMMSS(totalSeconds) {
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    const mm = String(m).padStart(2, "0");
+    const ss = String(s).padStart(2, "0");
+    return `${mm}:${ss}`;
+  }
+
+  function getCooldownUntil() {
+    const v = localStorage.getItem(COOLDOWN_KEY);
+    const n = v ? Number(v) : 0;
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function setCooldown(seconds) {
+    const until = Date.now() + seconds * 1000;
+    localStorage.setItem(COOLDOWN_KEY, String(until));
+    startCooldownUI();
+  }
+
+  function clearCooldown() {
+    localStorage.removeItem(COOLDOWN_KEY);
+    stopCooldownUI();
+  }
+
+  function stopCooldownUI() {
+    if (cooldownInterval) clearInterval(cooldownInterval);
+    cooldownInterval = null;
+    cooldownText.classList.add("hidden");
+    btnResend.disabled = false;
+    btnResend.textContent = "Kirim ulang email verifikasi";
+  }
+
+  function startCooldownUI() {
+    const until = getCooldownUntil();
+    const tick = () => {
+      const remain = Math.ceil((until - Date.now()) / 1000);
+      if (remain <= 0) {
+        clearCooldown();
+        return;
+      }
+      btnResend.disabled = true;
+      btnResend.textContent = "Tunggu...";
+      cooldownText.classList.remove("hidden");
+      cooldownTimer.textContent = formatMMSS(remain);
+    };
+
+    // run now + interval
+    tick();
+    if (cooldownInterval) clearInterval(cooldownInterval);
+    cooldownInterval = setInterval(tick, 1000);
+  }
+
+  // jalanin cooldown kalau masih ada sisa (misal refresh)
+  if (getCooldownUntil() > Date.now()) {
+    startCooldownUI();
+  }
+
+  async function resendVerification(email) {
+    try {
+      hideAlert();
+
+      // kalau masih cooldown, abaikan
+      const until = getCooldownUntil();
+      if (until > Date.now()) return;
+
+      // set cooldown dulu (biar klik spam tidak tembus)
+      setCooldown(COOLDOWN_SECONDS);
+
+      const { error } = await supabase.auth.resend({
+        type: "signup",
+        email
+      });
+
+      if (error) {
+        // kalau gagal, cooldown dibatalkan biar user bisa coba lagi
+        clearCooldown();
+        showAlert("error", error.message || "Gagal mengirim ulang verifikasi.");
+        return;
+      }
+
+      showAlert("success", "Email verifikasi sudah dikirim ulang. Cek Gmail kamu (termasuk Spam/Promotions).");
+    } catch (e) {
+      console.error(e);
+      clearCooldown();
+      showAlert("error", "Terjadi error saat mengirim ulang verifikasi.");
+    }
+  }
+
   // Kalau sudah login, jangan tampilkan halaman login lagi
   async function checkSession() {
     try {
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-      if (sessionError) {
-        console.error("Session error:", sessionError.message);
-        return;
-      }
+      if (sessionError) return;
+
       if (sessionData?.session) {
         window.location.href = "index.html";
       }
@@ -176,15 +346,16 @@
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // reset UI
+    hideAlert();
+    verifyPanel.classList.add("hidden");
     errorText.classList.add("hidden");
     errorText.textContent = "";
 
     const formData = new FormData(form);
-    const emailRaw = formData.get("email") ?? "";
-    const passwordRaw = formData.get("password") ?? "";
-
-    const email = emailRaw.toString().trim();
-    const password = passwordRaw.toString();
+    const email = (formData.get("email") ?? "").toString().trim();
+    const password = (formData.get("password") ?? "").toString();
 
     if (!email || !password) {
       errorText.textContent = "Email dan password wajib diisi.";
@@ -192,17 +363,45 @@
       return;
     }
 
-    loginButton.disabled = true;
-    loginButton.textContent = "Memproses...";
+    setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
+        const msg = (error.message || "").toLowerCase();
+
+        // email belum confirmed
+        if (msg.includes("email not confirmed") || msg.includes("not confirmed")) {
+          showAlert("info", "Email kamu belum terverifikasi. Silakan verifikasi dulu via Gmail.");
+          verifyPanel.classList.remove("hidden");
+
+          // bind tombol resend
+          btnResend.onclick = () => resendVerification(email);
+
+          // aktifkan UI cooldown kalau ada sisa
+          if (getCooldownUntil() > Date.now()) startCooldownUI();
+
+          setLoading(false);
+          return;
+        }
+
         errorText.textContent = error.message;
         errorText.classList.remove("hidden");
-        loginButton.disabled = false;
-        loginButton.textContent = "Masuk";
+        setLoading(false);
+        return;
+      }
+
+      // guard tambahan: kalau email_confirmed_at null
+      const user = data?.user;
+      if (user && user.email_confirmed_at === null) {
+        showAlert("info", "Email kamu belum terverifikasi. Silakan verifikasi dulu via Gmail.");
+        verifyPanel.classList.remove("hidden");
+        btnResend.onclick = () => resendVerification(email);
+
+        // logout supaya tidak ada session setengah
+        await supabase.auth.signOut();
+        setLoading(false);
         return;
       }
 
@@ -211,13 +410,24 @@
       console.error("Unexpected login error:", err);
       errorText.textContent = "Terjadi kesalahan jaringan. Coba lagi beberapa saat.";
       errorText.classList.remove("hidden");
-      loginButton.disabled = false;
-      loginButton.textContent = "Masuk";
+      setLoading(false);
     }
   });
 </script>
 
+<script>
+  function togglePassword(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const icon = btn.querySelector("img");
+
+    if (input.type === "password") {
+      input.type = "text";
+      icon.src = "image/visiblepassword.png";
+    } else {
+      input.type = "password";
+      icon.src = "image/invisiblepassword.png";
+    }
+  }
+</script>
 </body>
 </html>
-
-
