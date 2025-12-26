@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CTF | E-Learning Cyber Security</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            borderlight: '#D9D9D9',
+            softgreen: '#EEFBF3',
+            dark: '#000000',
+            slate2: '#222A34',
+            muted: '#52565B',
+            darknav: '#1E1E1E', 
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    /* Utilitas untuk tombol aktif filter */
+    .btn-filter.active {
+      background-color: #EEFBF3; 
+      border-color: #309255; 
+      color: #309255;
+      font-weight: 600;
+    }
+    /* Loader sederhana */
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #309255;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body class="bg-white text-slate2 flex flex-col min-h-screen">
+
+  <header class="bg-softgreen/60 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+      <div class="flex items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+            <img src="image/LogoHeader.png" alt="Logo" class="w-14 h-14 object-cover rounded-xl">
+          </div>
+          <div class="font-lexend leading-tight">
+            <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
+            <div class="text-primary text-3xl md:text-4xl font-medium">Security</div>
+          </div>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-4 font-mont text-xl">
+          <a href="index.html"
+             class="px-4 py-2 rounded-xl transition-all duration-200
+                    text-black
+                    hover:bg-softgreen hover:text-primary hover:font-semibold">
+            Home
+          </a>
+
+          <a href="CTF.html"
+             class="px-4 py-2 rounded-xl transition-all duration-200
+                    bg-primary text-white font-semibold
+                    hover:bg-white hover:text-primary hover:border hover:border-primary">
+            CTF
+          </a>
+
+          <a href="contact.html"
+             class="px-4 py-2 rounded-xl transition-all duration-200
+                    text-black
+                    hover:bg-softgreen hover:text-primary hover:font-semibold">
+            Contact
+          </a>
+        </nav>
+
+        <div id="auth-btn-container" class="flex items-center">
+          <a href="login.html"
+             class="inline-flex items-center justify-center px-6 py-3 rounded-2xl 
+                    bg-primary text-white font-mont text-xl font-bold shadow-md
+                    transition-all duration-200
+                    hover:bg-white hover:text-primary hover:border hover:border-primary">
+            LOGIN
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="bg-green-50">
+    <section class="max-w-7xl mx-auto px-4 lg:px-8 py-14">
+      <div class="grid lg:grid-cols-[1fr_1.2fr] gap-10 items-center">
+
+        <div>
+          <h1 class="font-lexend text-5xl sm:text-6xl lg:text-7xl leading-tight">
+            <span class="font-bold text-black">Welcome</span><br>
+            <span class="font-medium text-black">Our </span>
+            <span class="font-bold text-primary">CTF</span>
+          </h1>
+
+          <div class="inline-flex items-center px-6 py-3 rounded-3xl bg-white shadow-md mt-4">
+            <p class="font-lexend text-xl md:text-2xl">
+              <span class="text-black font-medium">Educate, </span>
+              <span class="text-primary font-medium">Protect,</span>
+              <span class="text-black font-medium"> Inovate</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img
+            src="image/P.CTF.png"
+            alt="CTF Hero"
+            class="object-cover"
+          />
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-12 flex-grow">
+    <div class="grid lg:grid-cols-[300px_1fr] gap-8">
+
+      <aside class="space-y-6">
+
+        <section class="rounded-[20px] border-2 border-borderlight p-5 bg-white">
+          <label class="block font-mont text-lg text-muted mb-3">Search</label>
+          <input id="q"
+            type="text"
+            placeholder="Cari judul challenge..."
+            class="w-full rounded-2xl border-2 border-borderlight px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/30"
+          />
+        </section>
+
+        <section class="rounded-[20px] border-2 border-borderlight p-5 bg-white">
+          <h2 class="font-lexend text-2xl text-black mb-4">Kategori</h2>
+          <div class="flex flex-col gap-3" id="categoryContainer">
+            <button class="btn-filter cat-btn active w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="all">
+              Semua Kategori
+            </button>
+            <button class="btn-filter cat-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Web Exploitation">
+              Web Exploitation
+            </button>
+            <button class="btn-filter cat-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Cryptography">
+              Cryptography
+            </button>
+            <button class="btn-filter cat-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Reverse Engineering">
+              Reverse Engineering
+            </button>
+            <button class="btn-filter cat-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Forensics">
+              Forensics
+            </button>
+            <button class="btn-filter cat-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="General Skills">
+              General Skills
+            </button>
+            <button class="btn-filter cat-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Binary Exploitation">
+              Binary Exploitation
+            </button>
+          </div>
+        </section>
+
+        <section class="rounded-[20px] border-2 border-borderlight p-5 bg-white">
+          <h2 class="font-lexend text-2xl text-black mb-4">Tingkat Kesulitan</h2>
+          <div class="flex flex-col gap-3" id="difficultyContainer">
+            <button class="btn-filter diff-btn active w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="all">
+              Semua
+            </button>
+            <button class="btn-filter diff-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Mudah">
+              Mudah
+            </button>
+            <button class="btn-filter diff-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Sedang">
+              Sedang
+            </button>
+            <button class="btn-filter diff-btn w-full text-left px-4 py-3 rounded-2xl border-2 border-borderlight text-muted hover:border-primary/50 transition" data-value="Sulit">
+              Sulit
+            </button>
+          </div>
+
+          <button id="btnReset"
+            class="mt-6 w-full rounded-2xl border border-primary bg-softgreen px-5 py-3
+                   font-lexend text-lg text-primary
+                   hover:bg-primary hover:text-white transition">
+            Reset Filter
+          </button>
+        </section>
+
+      </aside>
+
+      <section class="space-y-5">
+        <div class="flex items-end justify-between gap-4">
+          <div>
+            <h2 class="font-lexend text-3xl font-bold text-black">
+              Daftar <span class="text-primary">Challenge</span>
+            </h2>
+            <p class="mt-1 text-muted">Pilih challenge dan mulai latihan.</p>
+          </div>
+
+          <div class="text-sm text-muted">
+            Menampilkan: <span id="count" class="font-semibold text-black">0</span>
+          </div>
+        </div>
+
+        <div id="cards" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+           <div class="col-span-full flex justify-center py-10">
+             <div class="loader"></div>
+           </div>
+        </div>
+
+        <div id="empty" class="hidden rounded-3xl border border-borderlight p-6 text-center text-muted">
+          Tidak ada challenge yang sesuai filter.
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="bg-primary mt-auto">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6">
+      <p class="text-center text-white font-mont text-sm md:text-base">
+        © 2025 KSM Cyber Security — E-Learning Platform
+      </p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // Global Variables
+    let allChallenges = [];
+    let mySolvedIds = [];
+    let currentUser = null;
+
+    // Elements
+    const elCards = document.getElementById("cards");
+    const elCount = document.getElementById("count");
+    const elEmpty = document.getElementById("empty");
+    const elQ = document.getElementById("q");
+    const catButtons = document.querySelectorAll('.cat-btn');
+    const diffButtons = document.querySelectorAll('.diff-btn');
+
+    let currentCategory = "all";
+    let currentDifficulty = "all";
+
+    // --- 1. AUTH & INIT ---
+    async function init() {
+      const { data } = await supabase.auth.getSession();
+      currentUser = data?.session?.user || null;
+      renderAuthButton();
+      await loadData();
+    }
+
+    async function renderAuthButton() {
+      const container = document.getElementById("auth-btn-container");
+      if (!container) return;
+
+      if (!currentUser) {
+        // Tampilkan tombol LOGIN default (sesuai header asli)
+        container.innerHTML = `
+          <a href="login.html"
+             class="inline-flex items-center justify-center px-6 py-3 rounded-2xl 
+                    bg-primary text-white font-mont text-xl font-bold shadow-md
+                    transition-all duration-200
+                    hover:bg-white hover:text-primary hover:border hover:border-primary">
+            LOGIN
+          </a>`;
+      } else {
+        // Tampilkan tombol Profile jika sudah login
+        const avatar = currentUser.user_metadata?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.email)}&background=309255&color=fff`;
+        container.innerHTML = `
+          <a href="profile.html" class="flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 hover:bg-softgreen">
+            <img src="${avatar}" alt="Avatar" class="w-10 h-10 rounded-full border border-primary object-cover">
+            <span class="font-mont text-xl text-black font-semibold">Profile</span>
+          </a>`;
+      }
+    }
+
+    // --- 2. LOAD DATA FROM DB ---
+    async function loadData() {
+      try {
+        // Ambil Data CTF yang Aktif
+        const { data: ctfData, error: ctfError } = await supabase
+          .from('Db_CTF')
+          .select('*')
+          .eq('is_active', true) // Filter maintenance
+          .order('created_at', { ascending: false });
+
+        if (ctfError) throw ctfError;
+        allChallenges = ctfData || [];
+
+        // Ambil Data Submission (Jika Login)
+        if (currentUser) {
+          const { data: subData, error: subError } = await supabase
+            .from('Db_Submission')
+            .select('id_ctf')
+            .eq('id_pengguna', currentUser.id)
+            .eq('is_correct', true);
+
+          if (!subError && subData) {
+            mySolvedIds = subData.map(item => item.id_ctf);
+          }
+        }
+
+        applyFilters();
+
+      } catch (err) {
+        console.error("Gagal memuat data:", err);
+        elCards.innerHTML = `<div class="col-span-full text-center text-red-500 py-10">Gagal memuat data. Silakan refresh halaman.</div>`;
+      }
+    }
+
+    // --- 3. RENDER CARD ---
+    function render(list) {
+      elCards.innerHTML = "";
+      elCount.textContent = String(list.length);
+      elEmpty.classList.toggle("hidden", list.length !== 0);
+
+      const html = list.map(item => {
+        // Cek apakah soal sudah diselesaikan user ini
+        const isSolved = mySolvedIds.includes(item.id_ctf);
+        
+        let cardBorder = "border-borderlight hover:border-primary/50";
+        let statusBadge = "";
+        let actionBtn = "";
+
+        if (isSolved) {
+          // Status: SELESAI (Hijau)
+          cardBorder = "border-green-400 bg-green-50/20";
+          statusBadge = `<span class="shrink-0 inline-flex items-center justify-center rounded-xl bg-green-100 border border-green-200 px-3 py-1 text-green-700 text-xs font-bold font-mont uppercase">✅ Selesai</span>`;
+          actionBtn = `
+            <button disabled class="w-full inline-flex items-center justify-center rounded-2xl bg-green-600 px-4 py-3 font-lexend text-lg text-white opacity-60 cursor-not-allowed shadow-none">
+              Completed
+            </button>`;
+        } else {
+          // Status: BELUM SELESAI
+          // Warna badge kesulitan
+          let diffColor = "bg-softgreen text-primary border-primary/20"; 
+          if(item.tingkat_kesulitan === "Sedang") diffColor = "bg-yellow-50 text-yellow-700 border-yellow-200";
+          if(item.tingkat_kesulitan === "Sulit") diffColor = "bg-red-50 text-red-700 border-red-200";
+
+          statusBadge = `<span class="shrink-0 inline-flex items-center justify-center rounded-xl border px-3 py-1 text-xs font-bold font-mont uppercase ${diffColor}">${item.tingkat_kesulitan}</span>`;
+          
+          actionBtn = `
+            <button onclick="window.promptFlag('${item.id_ctf}', '${item.judul_ctf}')" 
+                    class="w-full inline-flex items-center justify-center rounded-2xl bg-primary px-4 py-3 font-lexend text-lg text-white hover:bg-primary/90 transition shadow-sm">
+              Mulai
+            </button>`;
+        }
+
+        // Link Download File (Optional)
+        let fileLink = "";
+        if (item.file_url) {
+          fileLink = `
+            <div class="mb-4">
+              <a href="${item.file_url}" target="_blank" class="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline font-semibold bg-blue-50 px-3 py-2 rounded-lg w-full justify-center border border-blue-100 transition hover:bg-blue-100">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Download File Soal
+              </a>
+            </div>`;
+        }
+
+        return `
+          <article class="rounded-[20px] border-2 ${cardBorder} p-5 bg-white flex flex-col h-full transition duration-200 relative overflow-hidden group">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div class="font-mont text-xl font-semibold text-black leading-tight">${item.judul_ctf}</div>
+              ${statusBadge}
+            </div>
+
+            <div class="text-sm text-muted font-mont mb-3 flex flex-wrap gap-2">
+              <span class="inline-block bg-gray-100 text-gray-600 rounded-lg px-2 py-1 text-xs font-semibold border border-gray-200">
+                ${item.kategori}
+              </span>
+              <span class="inline-block bg-yellow-50 text-yellow-700 rounded-lg px-2 py-1 text-xs font-bold border border-yellow-200">
+                ★ ${item.poin} Poin
+              </span>
+            </div>
+
+            <p class="text-sm text-slate2/80 mb-6 flex-grow whitespace-pre-line">${item.deskripsi}</p>
+
+            ${fileLink}
+
+            <div class="mt-auto">
+              ${actionBtn}
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      elCards.innerHTML = html;
+    }
+
+    // --- 4. ACTION SUBMIT FLAG ---
+    window.promptFlag = async function(idCtf, judul) {
+      if (!currentUser) {
+        if(confirm("Anda harus login untuk mengerjakan soal ini. Login sekarang?")) {
+          window.location.href = "login.html";
+        }
+        return;
+      }
+
+      const inputFlag = prompt(`Masukkan Flag untuk "${judul}":`);
+      if (inputFlag) {
+        // Panggil RPC 'submit_flag' di database
+        const { data, error } = await supabase.rpc('submit_flag', {
+          p_id_ctf: idCtf,
+          p_user_flag: inputFlag
+        });
+
+        if (error) {
+          alert("Error: " + error.message);
+        } else if (data === 'CORRECT') {
+          alert("🎉 SELAMAT! Flag Benar.");
+          await loadData(); // Reload agar status berubah jadi hijau
+        } else if (data === 'WRONG') {
+          alert("❌ Flag Salah! Coba lagi.");
+        } else if (data === 'ALREADY_SOLVED') {
+          alert("⚠️ Anda sudah menyelesaikan soal ini sebelumnya.");
+        }
+      }
+    }
+
+    // --- 5. FILTER LOGIC ---
+    function applyFilters() {
+      const q = (elQ.value || "").toLowerCase().trim();
+
+      const filtered = allChallenges.filter(item => {
+        const matchQ = !q || item.judul_ctf.toLowerCase().includes(q) || (item.deskripsi || "").toLowerCase().includes(q);
+        const matchCat = (currentCategory === "all") || (item.kategori === currentCategory);
+        const matchDiff = (currentDifficulty === "all") || (item.tingkat_kesulitan === currentDifficulty);
+        return matchQ && matchCat && matchDiff;
+      });
+
+      render(filtered);
+    }
+
+    function setActiveButton(buttons, value) {
+      buttons.forEach(btn => {
+        if(btn.dataset.value === value) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+    }
+
+    // Event Listeners
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentCategory = btn.dataset.value;
+        setActiveButton(catButtons, currentCategory);
+        applyFilters();
+      });
+    });
+
+    diffButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentDifficulty = btn.dataset.value;
+        setActiveButton(diffButtons, currentDifficulty);
+        applyFilters();
+      });
+    });
+
+    elQ.addEventListener("input", applyFilters);
+
+    document.getElementById("btnReset").addEventListener("click", () => {
+      elQ.value = "";
+      currentCategory = "all";
+      currentDifficulty = "all";
+      setActiveButton(catButtons, "all");
+      setActiveButton(diffButtons, "all");
+      applyFilters();
+    });
+
+    // Start App
+    init();
+  </script>
+
+</body>
+</html>

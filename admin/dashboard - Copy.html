@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard | E-Learning Cyber Security</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#309255',
+            borderlight: '#D9D9D9',
+            softgreen: '#EEFBF3',
+            muted: '#909090',
+          },
+          fontFamily: {
+            lexend: ['Lexend', 'system-ui', 'sans-serif'],
+            mont: ['Montserrat', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  </style>
+</head>
+
+<body class="bg-white text-gray-800">
+
+  <!-- DEV NOTICE -->
+  <div class="bg-yellow-50 border-b border-yellow-300">
+    <p class="max-w-7xl mx-auto px-4 lg:px-8 py-2 text-sm md:text-base font-mont text-yellow-900 text-center">
+      ⚠️ Website ini masih dalam tahap <span class="font-semibold">pengembangan</span>. Beberapa fitur admin masih percobaan.
+    </p>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="bg-softgreen/60 sticky top-0 z-40 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+      <div class="flex items-center justify-between gap-6">
+        <!-- Brand -->
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl border border-borderlight flex items-center justify-center bg-white">
+            <!-- ganti path sesuai asetmu -->
+            <img src="../image/LogoHeader.png" alt="Logo" class="w-14 h-14 object-cover rounded-xl">
+          </div>
+          <div class="font-lexend leading-tight">
+            <div class="text-gray-800 text-3xl md:text-4xl font-bold">Cyber</div>
+            <div class="text-primary text-3xl md:text-4xl font-medium">Security</div>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center gap-3">
+          <div id="admin-chip" class="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-borderlight">
+            <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+            <span class="font-mont text-sm text-gray-700">Admin Mode</span>
+            <span id="admin-email" class="font-mont text-sm font-semibold text-gray-900"></span>
+          </div>
+
+          <button id="btnLogout"
+            class="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-primary text-white font-mont text-lg font-bold shadow-md
+                   transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- LAYOUT -->
+  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
+    <div class="grid lg:grid-cols-[280px_1fr] gap-6">
+
+      <!-- SIDEBAR -->
+      <aside class="bg-softgreen rounded-3xl border border-borderlight p-4">
+        <h2 class="font-lexend text-2xl font-bold mb-4">
+          Admin <span class="text-primary">Dashboard</span>
+        </h2>
+
+        <nav class="space-y-2">
+          <button data-tab="kelas"
+            class="tabbtn w-full text-left px-4 py-3 rounded-2xl bg-white border border-borderlight font-mont font-semibold
+                   transition-all duration-200 hover:bg-primary hover:text-white">
+            Kelola Kelas
+          </button>
+          <button data-tab="modul"
+            class="tabbtn w-full text-left px-4 py-3 rounded-2xl bg-white border border-borderlight font-mont font-semibold
+                   transition-all duration-200 hover:bg-primary hover:text-white">
+            Kelola Modul
+          </button>
+          <button data-tab="materi"
+            class="tabbtn w-full text-left px-4 py-3 rounded-2xl bg-white border border-borderlight font-mont font-semibold
+                   transition-all duration-200 hover:bg-primary hover:text-white">
+            Kelola Materi / Video
+          </button>
+          <button data-tab="blog"
+            class="tabbtn w-full text-left px-4 py-3 rounded-2xl bg-white border border-borderlight font-mont font-semibold
+                   transition-all duration-200 hover:bg-primary hover:text-white">
+            Kelola Blog
+          </button>
+        </nav>
+
+        <div class="mt-6 p-4 rounded-2xl bg-white border border-borderlight">
+          <p class="text-sm text-gray-700">
+            Tips: untuk upload file/video, simpan di <span class="font-semibold">Supabase Storage</span>, lalu simpan URL-nya ke database.
+          </p>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <section class="bg-white rounded-3xl border border-borderlight p-5 md:p-7 shadow-sm">
+
+        <!-- ALERT -->
+        <div id="alert" class="hidden mb-5 rounded-2xl border px-4 py-3 text-sm"></div>
+
+        <!-- TAB: KELAS -->
+        <div id="tab-kelas" class="tabpane">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+            <h3 class="font-lexend text-3xl font-bold">Kelola <span class="text-primary">Kelas</span></h3>
+            <button id="btnRefreshKelas"
+              class="px-5 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-lg
+                     transition-all duration-200 hover:bg-primary hover:text-white">
+              Refresh
+            </button>
+          </div>
+
+          <!-- FORM TAMBAH KELAS -->
+          <div class="rounded-3xl bg-softgreen p-5 border border-borderlight">
+            <h4 class="font-lexend text-xl font-bold mb-4">Tambah Kelas</h4>
+
+            <form id="formKelas" class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-mont font-semibold mb-2">Nama Kelas</label>
+                <input name="nama_kelas" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="Contoh: Fundamental Linux" />
+              </div>
+
+              <div>
+                <label class="block font-mont font-semibold mb-2">Jenis Kelas</label>
+                <select name="jenis_kelas" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="fundamental">Fundamental</option>
+                  <option value="attack">Attack</option>
+                  <option value="defence">Defence</option>
+                  <option value="ctf">CTF</option>
+                </select>
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Deskripsi</label>
+                <textarea name="deskripsi_kelas" rows="3"
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="Deskripsi singkat kelas..."></textarea>
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Gambar Kelas (upload ke Storage)</label>
+                <div class="grid md:grid-cols-[1fr_220px] gap-3">
+                  <input type="file" id="kelasImageFile" accept="image/*"
+                    class="w-full px-4 py-3 rounded-2xl border border-borderlight bg-white" />
+                  <button type="button" id="btnUploadKelasImage"
+                    class="px-5 py-3 rounded-2xl bg-primary text-white font-mont font-bold shadow-md
+                           transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                    Upload Image
+                  </button>
+                </div>
+                <input type="hidden" name="gambar_kelas" id="kelasImageUrl" />
+                <p class="text-sm text-gray-600 mt-2">URL hasil upload akan otomatis masuk ke field gambar_kelas.</p>
+              </div>
+
+              <div class="md:col-span-2 flex gap-3">
+                <button type="submit" id="btnSaveKelas"
+                  class="px-6 py-3 rounded-2xl bg-primary text-white font-mont text-lg font-bold shadow-md
+                         transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                  Simpan Kelas
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- LIST KELAS -->
+          <div class="mt-8">
+            <h4 class="font-lexend text-xl font-bold mb-4">Daftar Kelas</h4>
+            <div id="kelasList" class="grid md:grid-cols-2 gap-4"></div>
+          </div>
+        </div>
+
+        <!-- TAB: MODUL -->
+        <div id="tab-modul" class="tabpane hidden">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+            <h3 class="font-lexend text-3xl font-bold">Kelola <span class="text-primary">Modul</span></h3>
+            <button id="btnRefreshModul"
+              class="px-5 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-lg
+                     transition-all duration-200 hover:bg-primary hover:text-white">
+              Refresh
+            </button>
+          </div>
+
+          <div class="rounded-3xl bg-softgreen p-5 border border-borderlight">
+            <h4 class="font-lexend text-xl font-bold mb-4">Tambah Modul</h4>
+
+            <form id="formModul" class="grid md:grid-cols-2 gap-4">
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Pilih Kelas</label>
+                <select id="modulKelasSelect" name="id_kelas" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Memuat kelas...</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-mont font-semibold mb-2">Nama Modul</label>
+                <input name="nama_modul" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="Contoh: Dasar Command Line" />
+              </div>
+
+              <div>
+                <label class="block font-mont font-semibold mb-2">Teacher ID (opsional)</label>
+                <input name="teacher_id"
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="UUID teacher (jika dipakai)" />
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Deskripsi Modul</label>
+                <textarea name="deskripsi_modul" rows="3"
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"></textarea>
+              </div>
+
+              <div class="md:col-span-2 flex gap-3">
+                <button type="submit" id="btnSaveModul"
+                  class="px-6 py-3 rounded-2xl bg-primary text-white font-mont text-lg font-bold shadow-md
+                         transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                  Simpan Modul
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="mt-8">
+            <h4 class="font-lexend text-xl font-bold mb-4">Daftar Modul</h4>
+            <div id="modulList" class="grid md:grid-cols-2 gap-4"></div>
+          </div>
+        </div>
+
+        <!-- TAB: MATERI -->
+        <div id="tab-materi" class="tabpane hidden">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+            <h3 class="font-lexend text-3xl font-bold">Kelola <span class="text-primary">Materi / Video</span></h3>
+            <button id="btnRefreshMateri"
+              class="px-5 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-lg
+                     transition-all duration-200 hover:bg-primary hover:text-white">
+              Refresh
+            </button>
+          </div>
+
+          <div class="rounded-3xl bg-softgreen p-5 border border-borderlight">
+            <h4 class="font-lexend text-xl font-bold mb-4">Tambah Materi</h4>
+
+            <form id="formMateri" class="grid md:grid-cols-2 gap-4">
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Pilih Modul</label>
+                <select id="materiModulSelect" name="id_modul" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Memuat modul...</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-mont font-semibold mb-2">Tipe Materi</label>
+                <select name="tipe_materi" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="video">Video</option>
+                  <option value="pdf">PDF</option>
+                  <option value="link">Link</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-mont font-semibold mb-2">Order No</label>
+                <input name="order_no" type="number" min="1" value="1" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30" />
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Judul Materi</label>
+                <input name="judul_materi" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="Contoh: Install Linux & Navigasi Folder" />
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Deskripsi</label>
+                <textarea name="deskripsi" rows="3"
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"></textarea>
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">File (upload Storage) / atau isi URL manual</label>
+                <div class="grid md:grid-cols-[1fr_220px] gap-3">
+                  <input type="file" id="materiFile" accept="video/*,application/pdf,image/*"
+                    class="w-full px-4 py-3 rounded-2xl border border-borderlight bg-white" />
+                  <button type="button" id="btnUploadMateriFile"
+                    class="px-5 py-3 rounded-2xl bg-primary text-white font-mont font-bold shadow-md
+                           transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                    Upload File
+                  </button>
+                </div>
+
+                <input name="file_url" id="materiFileUrl"
+                  class="mt-3 w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="https://... (boleh isi manual kalau link youtube/dll)" />
+              </div>
+
+              <div class="md:col-span-2 flex gap-3">
+                <button type="submit" id="btnSaveMateri"
+                  class="px-6 py-3 rounded-2xl bg-primary text-white font-mont text-lg font-bold shadow-md
+                         transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                  Simpan Materi
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="mt-8">
+            <h4 class="font-lexend text-xl font-bold mb-4">Daftar Materi</h4>
+            <div id="materiList" class="space-y-3"></div>
+          </div>
+        </div>
+
+        <!-- TAB: BLOG -->
+        <div id="tab-blog" class="tabpane hidden">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+            <h3 class="font-lexend text-3xl font-bold">Kelola <span class="text-primary">Blog</span></h3>
+            <button id="btnRefreshBlog"
+              class="px-5 py-3 rounded-2xl border border-primary bg-softgreen text-primary font-lexend text-lg
+                     transition-all duration-200 hover:bg-primary hover:text-white">
+              Refresh
+            </button>
+          </div>
+
+          <div class="rounded-3xl bg-softgreen p-5 border border-borderlight">
+            <h4 class="font-lexend text-xl font-bold mb-4">Tambah Post Blog</h4>
+
+            <form id="formBlog" class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-mont font-semibold mb-2">Kategori</label>
+                <select name="kategori" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="berita">Berita</option>
+                  <option value="tutorial">Tutorial</option>
+                  <option value="tips">Tips & Trik</option>
+                  <option value="edukasi">Edukasi</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-mont font-semibold mb-2">Status</label>
+                <select name="status" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="draft">Draft</option>
+                  <option value="publish">Publish</option>
+                </select>
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Judul</label>
+                <input name="judul" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="Contoh: Pencegahan Ransomware" />
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Konten</label>
+                <textarea name="konten" rows="8" required
+                  class="w-full px-4 py-3 rounded-2xl border border-borderlight focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="Tulis isi blog..."></textarea>
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block font-mont font-semibold mb-2">Thumbnail (upload Storage)</label>
+                <div class="grid md:grid-cols-[1fr_220px] gap-3">
+                  <input type="file" id="blogThumbFile" accept="image/*"
+                    class="w-full px-4 py-3 rounded-2xl border border-borderlight bg-white" />
+                  <button type="button" id="btnUploadBlogThumb"
+                    class="px-5 py-3 rounded-2xl bg-primary text-white font-mont font-bold shadow-md
+                           transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                    Upload Thumbnail
+                  </button>
+                </div>
+                <input type="hidden" name="thumbnail_url" id="blogThumbUrl" />
+              </div>
+
+              <div class="md:col-span-2 flex gap-3">
+                <button type="submit" id="btnSaveBlog"
+                  class="px-6 py-3 rounded-2xl bg-primary text-white font-mont text-lg font-bold shadow-md
+                         transition-all duration-200 hover:bg-white hover:text-primary hover:border hover:border-primary">
+                  Simpan Blog
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="mt-8">
+            <h4 class="font-lexend text-xl font-bold mb-4">Daftar Blog</h4>
+            <div id="blogList" class="space-y-3"></div>
+            <p class="text-sm text-gray-600 mt-3">
+              Jika list blog kosong/error, kemungkinan tabel <span class="font-semibold">Db_Blog</span> belum dibuat.
+            </p>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- SCRIPT -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    // === PUNYA KAMU ===
+    const supabaseUrl = "https://zvdyxgmfxgmupezpaaxk.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2ZHl4Z21meGdtdXBlenBhYXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NjM3NzksImV4cCI6MjA4MDIzOTc3OX0.I2JRd_EPXhOhvrV3IPijGKuL8jdkF55dGsPGSMN5wEg";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // === STORAGE ===
+    const BUCKET = "elearning"; // ganti kalau bucket kamu beda
+
+    // === UI helpers ===
+    const alertBox = document.getElementById("alert");
+    function showAlert(type, msg) {
+      alertBox.classList.remove("hidden");
+      const styles = {
+        error:  "border-red-200 bg-red-50 text-red-800",
+        success:"border-green-200 bg-green-50 text-green-800",
+        info:   "border-blue-200 bg-blue-50 text-blue-800",
+      };
+      alertBox.className = `mb-5 rounded-2xl border px-4 py-3 text-sm ${styles[type] || styles.info}`;
+      alertBox.textContent = msg;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    function hideAlert() { alertBox.classList.add("hidden"); }
+
+    function isEmailVerified(user) {
+      return Boolean(user?.email_confirmed_at);
+    }
+
+    async function isAdminUser(userId) {
+      // sesuai DB kamu: Db_Pengguna + id_pengguna + role
+      const { data, error } = await supabase
+        .from("Db_Pengguna")
+        .select("role, email_pengguna, nama_pengguna")
+        .eq("id_pengguna", userId)
+        .maybeSingle();
+      if (error) throw error;
+      return { ok: (data?.role || "").toLowerCase() === "admin", profile: data };
+    }
+
+    // === AUTH GUARD ===
+    async function guardAdmin() {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        showAlert("error", "Gagal cek session. Coba refresh.");
+        return;
+      }
+
+      const session = data?.session;
+      if (!session?.user) {
+        window.location.href = "admin-login.html";
+        return;
+      }
+
+      const user = session.user;
+
+      if (!isEmailVerified(user)) {
+        await supabase.auth.signOut();
+        window.location.href = "admin-login.html";
+        return;
+      }
+
+      try {
+        const res = await isAdminUser(user.id);
+        if (!res.ok) {
+          await supabase.auth.signOut();
+          window.location.href = "admin-login.html";
+          return;
+        }
+
+        // show chip
+        const chip = document.getElementById("admin-chip");
+        const emailEl = document.getElementById("admin-email");
+        chip.classList.remove("hidden");
+        emailEl.textContent = user.email ? `(${user.email})` : "";
+      } catch (e) {
+        console.error(e);
+        showAlert("error", "Akses admin gagal. Pastikan policy/RLS Db_Pengguna sudah benar.");
+      }
+    }
+
+    // === LOGOUT ===
+    document.getElementById("btnLogout").addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      window.location.href = "index.html";
+    });
+
+    // === Tabs ===
+    const tabButtons = [...document.querySelectorAll(".tabbtn")];
+    const panes = {
+      kelas: document.getElementById("tab-kelas"),
+      modul: document.getElementById("tab-modul"),
+      materi: document.getElementById("tab-materi"),
+      blog: document.getElementById("tab-blog"),
+    };
+
+    function setActiveTab(tab) {
+      for (const k of Object.keys(panes)) panes[k].classList.add("hidden");
+      panes[tab].classList.remove("hidden");
+
+      tabButtons.forEach(btn => {
+        const active = btn.dataset.tab === tab;
+        btn.classList.toggle("bg-primary", active);
+        btn.classList.toggle("text-white", active);
+        btn.classList.toggle("border-primary", active);
+        btn.classList.toggle("bg-white", !active);
+        btn.classList.toggle("text-gray-800", !active);
+      });
+
+      localStorage.setItem("admin_tab", tab);
+    }
+
+    tabButtons.forEach(btn => btn.addEventListener("click", () => setActiveTab(btn.dataset.tab)));
+
+    // === Storage upload helper ===
+    async function uploadToStorage(file, folder) {
+      if (!file) throw new Error("File belum dipilih.");
+
+      const ext = file.name.split(".").pop();
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const path = `${folder}/${Date.now()}_${safeName}`;
+
+      const { error } = await supabase.storage.from(BUCKET).upload(path, file, {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: file.type || undefined
+      });
+      if (error) throw error;
+
+      const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
+      return data.publicUrl;
+    }
+
+    // === DATA LOADERS ===
+    async function loadKelas() {
+      const list = document.getElementById("kelasList");
+      list.innerHTML = "";
+
+      const { data, error } = await supabase
+        .from("Db_Kelas")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error(error);
+        showAlert("error", "Gagal load kelas. Cek RLS/policy Db_Kelas.");
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        list.innerHTML = `<div class="text-gray-600">Belum ada kelas.</div>`;
+        return;
+      }
+
+      list.innerHTML = data.map(k => `
+        <div class="rounded-3xl border border-borderlight p-4">
+          <div class="flex gap-4">
+            <div class="w-28 h-20 rounded-2xl border border-borderlight bg-softgreen overflow-hidden flex items-center justify-center">
+              ${k.gambar_kelas ? `<img src="${k.gambar_kelas}" class="w-full h-full object-cover" />` : `<span class="text-sm text-gray-500">No Image</span>`}
+            </div>
+            <div class="flex-1">
+              <div class="font-lexend text-xl font-bold">${k.nama_kelas || "-"}</div>
+              <div class="text-sm text-gray-600 mt-1">Kategori: <span class="font-semibold">${k.jenis_kelas || "-"}</span></div>
+              <div class="text-sm text-gray-700 mt-2 line-clamp-2">${k.deskripsi_kelas || ""}</div>
+            </div>
+          </div>
+          <div class="mt-3 text-xs text-gray-500">ID: ${k.id_kelas}</div>
+        </div>
+      `).join("");
+
+      // update select untuk modul
+      const sel = document.getElementById("modulKelasSelect");
+      sel.innerHTML = `<option value="">-- Pilih Kelas --</option>` + data.map(k =>
+        `<option value="${k.id_kelas}">${k.nama_kelas}</option>`
+      ).join("");
+    }
+
+    async function loadModul() {
+      const list = document.getElementById("modulList");
+      list.innerHTML = "";
+
+      const { data, error } = await supabase
+        .from("Db_Modul")
+        .select("*, Db_Kelas(nama_kelas)")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error(error);
+        showAlert("error", "Gagal load modul. Cek RLS/policy Db_Modul.");
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        list.innerHTML = `<div class="text-gray-600">Belum ada modul.</div>`;
+        return;
+      }
+
+      list.innerHTML = data.map(m => `
+        <div class="rounded-3xl border border-borderlight p-4">
+          <div class="font-lexend text-xl font-bold">${m.nama_modul || "-"}</div>
+          <div class="text-sm text-gray-600 mt-1">Kelas: <span class="font-semibold">${m.Db_Kelas?.nama_kelas || "-"}</span></div>
+          <div class="text-sm text-gray-700 mt-2 line-clamp-2">${m.deskripsi_modul || ""}</div>
+          <div class="mt-3 text-xs text-gray-500">ID: ${m.id_modul}</div>
+        </div>
+      `).join("");
+
+      // update select untuk materi
+      const sel = document.getElementById("materiModulSelect");
+      sel.innerHTML = `<option value="">-- Pilih Modul --</option>` + data.map(m =>
+        `<option value="${m.id_modul}">${m.nama_modul}</option>`
+      ).join("");
+    }
+
+    async function loadMateri() {
+      const list = document.getElementById("materiList");
+      list.innerHTML = "";
+
+      const { data, error } = await supabase
+        .from("Db_MateriKelas")
+        .select("*, Db_Modul(nama_modul)")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error(error);
+        showAlert("error", "Gagal load materi. Cek RLS/policy Db_MateriKelas.");
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        list.innerHTML = `<div class="text-gray-600">Belum ada materi.</div>`;
+        return;
+      }
+
+      list.innerHTML = data.map(x => `
+        <div class="rounded-3xl border border-borderlight p-4">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+            <div>
+              <div class="font-lexend text-lg font-bold">${x.judul_materi || "-"}</div>
+              <div class="text-sm text-gray-600 mt-1">
+                Modul: <span class="font-semibold">${x.Db_Modul?.nama_modul || "-"}</span> ·
+                Tipe: <span class="font-semibold">${x.tipe_materi || "-"}</span> ·
+                Order: <span class="font-semibold">${x.order_no ?? "-"}</span>
+              </div>
+            </div>
+            ${x.file_url ? `<a class="text-primary font-semibold hover:underline" href="${x.file_url}" target="_blank" rel="noreferrer">Buka File</a>` : `<span class="text-sm text-gray-500">No URL</span>`}
+          </div>
+          <div class="text-sm text-gray-700 mt-2">${x.deskripsi || ""}</div>
+          <div class="mt-3 text-xs text-gray-500">ID: ${x.id_materikelas}</div>
+        </div>
+      `).join("");
+    }
+
+    async function loadBlog() {
+      const list = document.getElementById("blogList");
+      list.innerHTML = "";
+
+      const { data, error } = await supabase
+        .from("Db_Blog")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.warn(error);
+        list.innerHTML = `<div class="text-gray-600">Tidak bisa load blog. Mungkin tabel Db_Blog belum ada / RLS belum diatur.</div>`;
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        list.innerHTML = `<div class="text-gray-600">Belum ada blog.</div>`;
+        return;
+      }
+
+      list.innerHTML = data.map(b => `
+        <div class="rounded-3xl border border-borderlight p-4">
+          <div class="flex gap-4">
+            <div class="w-28 h-20 rounded-2xl border border-borderlight bg-softgreen overflow-hidden flex items-center justify-center">
+              ${b.thumbnail_url ? `<img src="${b.thumbnail_url}" class="w-full h-full object-cover" />` : `<span class="text-sm text-gray-500">No Thumb</span>`}
+            </div>
+            <div class="flex-1">
+              <div class="font-lexend text-lg font-bold">${b.judul || "-"}</div>
+              <div class="text-sm text-gray-600 mt-1">
+                ${b.kategori || "-"} · <span class="font-semibold">${b.status || "-"}</span>
+              </div>
+              <div class="text-sm text-gray-700 mt-2 line-clamp-2">${(b.konten || "").slice(0,160)}...</div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // === ACTIONS: Upload buttons ===
+    document.getElementById("btnUploadKelasImage").addEventListener("click", async () => {
+      hideAlert();
+      try {
+        const f = document.getElementById("kelasImageFile").files[0];
+        const url = await uploadToStorage(f, "kelas");
+        document.getElementById("kelasImageUrl").value = url;
+        showAlert("success", "Upload gambar kelas berhasil. URL sudah terisi.");
+      } catch (e) {
+        console.error(e);
+        showAlert("error", e.message || "Upload gagal.");
+      }
+    });
+
+    document.getElementById("btnUploadMateriFile").addEventListener("click", async () => {
+      hideAlert();
+      try {
+        const f = document.getElementById("materiFile").files[0];
+        const url = await uploadToStorage(f, "materi");
+        document.getElementById("materiFileUrl").value = url;
+        showAlert("success", "Upload file materi berhasil. URL sudah terisi.");
+      } catch (e) {
+        console.error(e);
+        showAlert("error", e.message || "Upload gagal.");
+      }
+    });
+
+    document.getElementById("btnUploadBlogThumb").addEventListener("click", async () => {
+      hideAlert();
+      try {
+        const f = document.getElementById("blogThumbFile").files[0];
+        const url = await uploadToStorage(f, "blog");
+        document.getElementById("blogThumbUrl").value = url;
+        showAlert("success", "Upload thumbnail blog berhasil.");
+      } catch (e) {
+        console.error(e);
+        showAlert("error", e.message || "Upload gagal.");
+      }
+    });
+
+    // === FORMS: Insert ===
+    document.getElementById("formKelas").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const fd = new FormData(e.target);
+      const payload = {
+        nama_kelas: fd.get("nama_kelas"),
+        jenis_kelas: fd.get("jenis_kelas"),
+        deskripsi_kelas: fd.get("deskripsi_kelas") || null,
+        gambar_kelas: fd.get("gambar_kelas") || null,
+      };
+
+      const { data: sess } = await supabase.auth.getSession();
+      const teacherId = sess?.session?.user?.id;
+      if (teacherId) payload.teacher_id = teacherId; // optional
+
+      const { error } = await supabase.from("Db_Kelas").insert(payload);
+      if (error) {
+        console.error(error);
+        showAlert("error", error.message || "Gagal simpan kelas.");
+        return;
+      }
+
+      e.target.reset();
+      document.getElementById("kelasImageUrl").value = "";
+      showAlert("success", "Kelas berhasil dibuat.");
+      await loadKelas();
+    });
+
+    document.getElementById("formModul").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const fd = new FormData(e.target);
+      const payload = {
+        id_kelas: fd.get("id_kelas"),
+        nama_modul: fd.get("nama_modul"),
+        deskripsi_modul: fd.get("deskripsi_modul") || null,
+        teacher_id: fd.get("teacher_id") || null,
+      };
+
+      const { error } = await supabase.from("Db_Modul").insert(payload);
+      if (error) {
+        console.error(error);
+        showAlert("error", error.message || "Gagal simpan modul.");
+        return;
+      }
+
+      e.target.reset();
+      showAlert("success", "Modul berhasil dibuat.");
+      await loadModul();
+    });
+
+    document.getElementById("formMateri").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const fd = new FormData(e.target);
+      const payload = {
+        id_modul: fd.get("id_modul"),
+        tipe_materi: fd.get("tipe_materi"),
+        judul_materi: fd.get("judul_materi"),
+        deskripsi: fd.get("deskripsi") || null,
+        file_url: fd.get("file_url") || null,
+        order_no: Number(fd.get("order_no") || 1),
+      };
+
+      const { error } = await supabase.from("Db_MateriKelas").insert(payload);
+      if (error) {
+        console.error(error);
+        showAlert("error", error.message || "Gagal simpan materi.");
+        return;
+      }
+
+      e.target.reset();
+      document.getElementById("materiFileUrl").value = "";
+      showAlert("success", "Materi berhasil dibuat.");
+      await loadMateri();
+    });
+
+    document.getElementById("formBlog").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const fd = new FormData(e.target);
+      const { data: sess } = await supabase.auth.getSession();
+      const authorId = sess?.session?.user?.id || null;
+
+      const payload = {
+        judul: fd.get("judul"),
+        konten: fd.get("konten"),
+        kategori: fd.get("kategori"),
+        status: fd.get("status"),
+        thumbnail_url: fd.get("thumbnail_url") || null,
+        author_id: authorId,
+      };
+
+      const { error } = await supabase.from("Db_Blog").insert(payload);
+      if (error) {
+        console.warn(error);
+        showAlert("error", "Gagal simpan blog. Pastikan tabel Db_Blog sudah ada + RLS benar.");
+        return;
+      }
+
+      e.target.reset();
+      document.getElementById("blogThumbUrl").value = "";
+      showAlert("success", "Blog berhasil disimpan.");
+      await loadBlog();
+    });
+
+    // === Refresh buttons ===
+    document.getElementById("btnRefreshKelas").addEventListener("click", loadKelas);
+    document.getElementById("btnRefreshModul").addEventListener("click", loadModul);
+    document.getElementById("btnRefreshMateri").addEventListener("click", loadMateri);
+    document.getElementById("btnRefreshBlog").addEventListener("click", loadBlog);
+
+    // === INIT ===
+    await guardAdmin();
+
+    const saved = localStorage.getItem("admin_tab") || "kelas";
+    setActiveTab(saved);
+
+    // preload data
+    await loadKelas();
+    await loadModul();
+    await loadMateri();
+    await loadBlog();
+  </script>
+
+</body>
+</html>
